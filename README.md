@@ -48,7 +48,7 @@ Visit `http://localhost:3000` in your web browser.
 - `public/checkout.html`: 3-step checkout & payment simulator
 - `public/data.js`: Catalog inventory & franchise definitions
 - `public/app.js`: State management, cart mechanics & filtering
-- `public/chatbot.js`: AI shopping wingman widget
+- `public/chatbot.js`: J.A.R.V.I.S. AI assistant widget
 
 ---
 
