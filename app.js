@@ -139,6 +139,13 @@ function initEventListeners() {
       });
       pill.className = 'cat-pill active px-4 py-2.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 shadow-glow-cyan transition-all border border-cyan-400';
       state.activeCategory = pill.getAttribute('data-category');
+
+      // If "All" is clicked, reset BOTH category and universe/fandom so it restores Anime, Marvel, and DC products
+      if (state.activeCategory === 'All') {
+        state.activeFandom = 'All';
+        universeCards.forEach(c => c.classList.remove('ring-2', 'ring-cyan-400'));
+      }
+
       renderFilteredCatalog();
     });
   });
