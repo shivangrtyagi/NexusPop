@@ -1,0 +1,27 @@
+{
+  "name": "nexus-pop",
+  "version": "1.0.0",
+  "description": "Nexus Pop - Production-Ready Fandom Merchandise E-Commerce Store & AI Shopping Assistant",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "ecommerce",
+    "anime",
+    "marvel",
+    "dc",
+    "gemini-api",
+    "ai-assistant"
+  ],
+  "author": "Nexus Pop Engineering",
+  "license": "MIT",
+  "dependencies": {
+    "@google/genai": "^2.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
