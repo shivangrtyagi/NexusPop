@@ -12,14 +12,16 @@ const state = {
 };
 
 // Initialize Application
-document.addEventListener('DOMContentLoaded', () => {
-  lucide.createIcons();
-  loadCartFromStorage();
-  initEventListeners();
-  renderFilteredCatalog();
-  updateCartUI();
-  initHeroCarousel();
-});
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+    loadCartFromStorage();
+    initEventListeners();
+    renderFilteredCatalog();
+    updateCartUI();
+    initHeroCarousel();
+  });
+}
 
 // Load cart & applied coupons from localStorage
 function loadCartFromStorage() {
@@ -47,35 +49,86 @@ function saveCartToStorage() {
 
 // Event Listeners setup
 function initEventListeners() {
-  // Desktop Search Input
+  // Desktop Search Input & Suggestions
   const searchInput = document.getElementById('searchInput');
+  const searchSubmitBtn = document.getElementById('searchSubmitBtn');
+
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
-      state.searchQuery = e.target.value.trim().toLowerCase();
+      const val = e.target.value;
+      state.searchQuery = val.trim().toLowerCase();
       renderFilteredCatalog();
+      updateSearchSuggestions(val, 'searchSuggestions');
     });
+
+    searchInput.addEventListener('focus', () => {
+      updateSearchSuggestions(searchInput.value, 'searchSuggestions');
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        hideSearchSuggestions();
+        handleSearchSubmit(searchInput.value);
+      }
+    });
+
+    if (searchSubmitBtn) {
+      searchSubmitBtn.addEventListener('click', () => {
+        handleSearchSubmit(searchInput.value);
+      });
+    }
   }
 
-  // Keyboard shortcut '/' to focus search
-  document.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.activeElement !== searchInput && document.activeElement.tagName !== 'INPUT') {
-      e.preventDefault();
-      searchInput?.focus();
+  // Mobile Search Input & Suggestions
+  const mobileSearchInput = document.getElementById('mobileSearchInput');
+  const mobileSearchSubmitBtn = document.getElementById('mobileSearchSubmitBtn');
+
+  if (mobileSearchInput) {
+    mobileSearchInput.addEventListener('input', (e) => {
+      const val = e.target.value;
+      state.searchQuery = val.trim().toLowerCase();
+      renderFilteredCatalog();
+      updateSearchSuggestions(val, 'mobileSearchSuggestions');
+    });
+
+    mobileSearchInput.addEventListener('focus', () => {
+      updateSearchSuggestions(mobileSearchInput.value, 'mobileSearchSuggestions');
+    });
+
+    mobileSearchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        hideSearchSuggestions();
+        handleSearchSubmit(mobileSearchInput.value);
+      }
+    });
+
+    if (mobileSearchSubmitBtn) {
+      mobileSearchSubmitBtn.addEventListener('click', () => {
+        handleSearchSubmit(mobileSearchInput.value);
+      });
     }
-    // ESC to close drawer
-    if (e.key === 'Escape') {
-      closeCart();
+  }
+
+  // Close suggestions when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#searchContainer') && !e.target.closest('#mobileSearchContainer')) {
+      hideSearchSuggestions();
     }
   });
 
-  // Mobile Search Input
-  const mobileSearchInput = document.getElementById('mobileSearchInput');
-  if (mobileSearchInput) {
-    mobileSearchInput.addEventListener('input', (e) => {
-      state.searchQuery = e.target.value.trim().toLowerCase();
-      renderFilteredCatalog();
-    });
-  }
+  // Global Keyboard shortcuts ('/' to focus, ESC to close)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== searchInput && document.activeElement !== mobileSearchInput && document.activeElement.tagName !== 'INPUT') {
+      e.preventDefault();
+      searchInput?.focus();
+    }
+    if (e.key === 'Escape') {
+      hideSearchSuggestions();
+      closeCart();
+    }
+  });
 
   // Category Pills Filter
   const categoryPills = document.querySelectorAll('.cat-pill');
@@ -218,6 +271,7 @@ function initEventListeners() {
 // Filter and Sort Catalog
 function renderFilteredCatalog() {
   const grid = document.getElementById('productGrid');
+  if (!grid) return;
   const emptyCatalog = document.getElementById('emptyCatalog');
   const itemCount = document.getElementById('itemCount');
 
@@ -656,11 +710,233 @@ export function addBundleToCart(productIds = []) {
   openCart();
 }
 
+// Global Search Submission Handler
+export function handleSearchSubmit(rawQuery) {
+  const query = (rawQuery || '').trim().toLowerCase();
+  if (!query) return;
+
+  // Franchise aliases mapping (Supports all variations of superhero / anime search)
+  const franchiseMap = {
+    // Spider-Man & Spider-Verse
+    'spider': 'spiderman',
+    'spider-man': 'spiderman',
+    'spiderman': 'spiderman',
+    'spider man': 'spiderman',
+    'spidey': 'spiderman',
+    'miles': 'spiderman',
+    'miles morales': 'spiderman',
+    'peter': 'spiderman',
+    'peter parker': 'spiderman',
+    'spiderverse': 'spiderman',
+    'spider-verse': 'spiderman',
+    'across the spider-verse': 'spiderman',
+    'into the spider-verse': 'spiderman',
+
+    // Batman & Gotham
+    'batman': 'batman',
+    'bat man': 'batman',
+    'the batman': 'batman',
+    'dark knight': 'batman',
+    'gotham': 'batman',
+    'bruce wayne': 'batman',
+    'joker': 'batman',
+    'arkham': 'batman',
+
+    // Jujutsu Kaisen
+    'jjk': 'jjk',
+    'jujutsu': 'jjk',
+    'jujutsu kaisen': 'jjk',
+    'gojo': 'jjk',
+    'satoru': 'jjk',
+    'satoru gojo': 'jjk',
+    'megumi': 'jjk',
+    'fushiguro': 'jjk',
+    'sukuna': 'jjk',
+    'unlimited void': 'jjk',
+
+    // Demon Slayer
+    'demon slayer': 'demonslayer',
+    'demonslayer': 'demonslayer',
+    'kimetsu': 'demonslayer',
+    'kimetsu no yaiba': 'demonslayer',
+    'tanjiro': 'demonslayer',
+    'nezuko': 'demonslayer',
+    'rengoku': 'demonslayer',
+    'kyojuro': 'demonslayer',
+    'zenitsu': 'demonslayer',
+    'inosuke': 'demonslayer',
+
+    // One Piece
+    'one piece': 'onepiece',
+    'onepiece': 'onepiece',
+    'luffy': 'onepiece',
+    'monkey d luffy': 'onepiece',
+    'gear 5': 'onepiece',
+    'zoro': 'onepiece',
+    'straw hat': 'onepiece'
+  };
+
+  // 1. Direct exact alias match
+  if (franchiseMap[query]) {
+    window.location.href = `fandom.html?hero=${franchiseMap[query]}`;
+    return;
+  }
+
+  // 2. Contains franchise keyword (e.g. "spider man poster", "cool batman cover")
+  for (const [key, heroId] of Object.entries(franchiseMap)) {
+    if (query.includes(key)) {
+      window.location.href = `fandom.html?hero=${heroId}`;
+      return;
+    }
+  }
+
+  // 3. Otherwise navigate to search results page
+  window.location.href = `fandom.html?search=${encodeURIComponent(query)}`;
+}
+
+// Live Autocomplete Suggestions Controller
+export function updateSearchSuggestions(rawQuery, containerId = 'searchSuggestions') {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const query = (rawQuery || '').trim().toLowerCase();
+
+  if (!query) {
+    container.innerHTML = `
+      <div class="p-2.5 space-y-3">
+        <div>
+          <div class="text-[10px] font-bold tracking-wider text-slate-400 uppercase mb-2">🔥 Popular Franchise Hubs</div>
+          <div class="grid grid-cols-2 gap-1.5">
+            <a href="fandom.html?hero=spiderman" class="flex items-center gap-2 p-2 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-xs text-slate-200 hover:text-cyan-400 transition-colors border border-slate-700/40">
+              <span class="text-base">🕷️</span> <span class="font-medium">Spider-Verse</span>
+            </a>
+            <a href="fandom.html?hero=batman" class="flex items-center gap-2 p-2 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-xs text-slate-200 hover:text-cyan-400 transition-colors border border-slate-700/40">
+              <span class="text-base">🦇</span> <span class="font-medium">The Batman</span>
+            </a>
+            <a href="fandom.html?hero=jjk" class="flex items-center gap-2 p-2 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-xs text-slate-200 hover:text-cyan-400 transition-colors border border-slate-700/40">
+              <span class="text-base">⚡</span> <span class="font-medium">Jujutsu Kaisen</span>
+            </a>
+            <a href="fandom.html?hero=demonslayer" class="flex items-center gap-2 p-2 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-xs text-slate-200 hover:text-cyan-400 transition-colors border border-slate-700/40">
+              <span class="text-base">🔥</span> <span class="font-medium">Demon Slayer</span>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="text-[10px] font-bold tracking-wider text-slate-400 uppercase mb-2">⚡ Quick Categories</div>
+          <div class="flex flex-wrap gap-1.5">
+            <a href="fandom.html?search=posters" class="px-2.5 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 hover:text-cyan-400 hover:bg-slate-700 border border-slate-700/60">Posters</a>
+            <a href="fandom.html?search=covers" class="px-2.5 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 hover:text-cyan-400 hover:bg-slate-700 border border-slate-700/60">Phone Covers</a>
+            <a href="fandom.html?search=stickers" class="px-2.5 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 hover:text-cyan-400 hover:bg-slate-700 border border-slate-700/60">Vinyl Stickers</a>
+            <a href="fandom.html?search=keychains" class="px-2.5 py-1 rounded-lg bg-slate-800 text-xs text-slate-300 hover:text-cyan-400 hover:bg-slate-700 border border-slate-700/60">Keychains</a>
+          </div>
+        </div>
+      </div>
+    `;
+    container.classList.remove('hidden');
+    return;
+  }
+
+  // Check if query matches any franchise
+  let matchedFranchise = null;
+  if (query.includes('spider') || query.includes('miles') || query.includes('peter')) {
+    matchedFranchise = { id: 'spiderman', name: 'Spider-Man: Spider-Verse', icon: '🕷️' };
+  } else if (query.includes('batman') || query.includes('gotham') || query.includes('dark knight')) {
+    matchedFranchise = { id: 'batman', name: 'The Batman & Gotham', icon: '🦇' };
+  } else if (query.includes('jjk') || query.includes('jujutsu') || query.includes('gojo') || query.includes('megumi')) {
+    matchedFranchise = { id: 'jjk', name: 'Jujutsu Kaisen', icon: '⚡' };
+  } else if (query.includes('demon') || query.includes('slayer') || query.includes('rengoku') || query.includes('tanjiro')) {
+    matchedFranchise = { id: 'demonslayer', name: 'Demon Slayer: Kimetsu', icon: '🔥' };
+  } else if (query.includes('piece') || query.includes('luffy') || query.includes('zoro')) {
+    matchedFranchise = { id: 'onepiece', name: 'One Piece: Gear 5', icon: '👒' };
+  }
+
+  // Filter matching products
+  const matchedProducts = PRODUCTS.filter(p => {
+    const matchName = p.name.toLowerCase().includes(query);
+    const matchCategory = p.category.toLowerCase().includes(query);
+    const matchUniverse = p.universe.toLowerCase().includes(query);
+    const matchCraft = (p.craftsmanship || '').toLowerCase().includes(query);
+    const matchDesc = p.description.toLowerCase().includes(query);
+    const matchTags = p.tags && p.tags.some(t => t.toLowerCase().includes(query));
+    return matchName || matchCategory || matchUniverse || matchCraft || matchDesc || matchTags;
+  }).slice(0, 4);
+
+  let html = '<div class="space-y-2">';
+
+  if (matchedFranchise) {
+    html += `
+      <a href="fandom.html?hero=${matchedFranchise.id}" class="flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-cyan-950/50 via-slate-800 to-slate-900 hover:from-cyan-900/60 hover:to-slate-800 border border-cyan-500/40 hover:border-cyan-400 group transition-all">
+        <div class="flex items-center gap-2.5">
+          <span class="text-xl">${matchedFranchise.icon}</span>
+          <div>
+            <div class="text-xs font-bold text-white group-hover:text-cyan-400 transition-colors">${matchedFranchise.name} Vault</div>
+            <div class="text-[10px] text-slate-400">Dedicated hero domain with 1-Click Collector Bundle</div>
+          </div>
+        </div>
+        <span class="text-[11px] font-semibold text-cyan-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+          Open Vault &rarr;
+        </span>
+      </a>
+    `;
+  }
+
+  if (matchedProducts.length > 0) {
+    html += `<div class="text-[10px] font-bold tracking-wider text-slate-400 uppercase px-2">Products in Vault (${matchedProducts.length})</div>`;
+    html += `<div class="space-y-1">`;
+    matchedProducts.forEach(p => {
+      const targetUrl = p.franchiseKey ? `fandom.html?hero=${p.franchiseKey}` : `fandom.html?search=${encodeURIComponent(p.name)}`;
+      html += `
+        <a href="${targetUrl}" class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/80 transition-colors group">
+          <img src="${p.image}" alt="${p.name}" class="w-10 h-10 rounded-lg object-cover bg-slate-950 shrink-0">
+          <div class="flex-1 min-w-0">
+            <div class="text-xs font-medium text-slate-200 group-hover:text-cyan-400 truncate">${p.name}</div>
+            <div class="text-[10px] text-slate-400">${p.category} &bull; ${p.universe}</div>
+          </div>
+          <div class="text-xs font-bold text-cyan-400 shrink-0">₹${p.price}</div>
+        </a>
+      `;
+    });
+    html += `</div>`;
+  } else if (!matchedFranchise) {
+    html += `
+      <div class="p-3 text-center text-xs text-slate-400">
+        No immediate drops found for "<span class="text-white font-semibold">${rawQuery}</span>".
+        <div class="text-[11px] text-cyan-400 mt-1">Press Enter to search full vault!</div>
+      </div>
+    `;
+  }
+
+  html += `
+    <div class="pt-2 border-t border-slate-800/80">
+      <button type="button" class="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors search-all-btn">
+        <span>View all results for "<strong class="text-cyan-400">${rawQuery}</strong>"</span>
+        <kbd class="px-1.5 py-0.5 bg-slate-900 border border-slate-700 rounded text-[10px] font-mono text-slate-400">&crarr; Enter</kbd>
+      </button>
+    </div>
+  </div>`;
+
+  container.innerHTML = html;
+  container.classList.remove('hidden');
+
+  const allBtn = container.querySelector('.search-all-btn');
+  if (allBtn) {
+    allBtn.onclick = () => handleSearchSubmit(rawQuery);
+  }
+}
+
+export function hideSearchSuggestions() {
+  const desktop = document.getElementById('searchSuggestions');
+  const mobile = document.getElementById('mobileSearchSuggestions');
+  if (desktop) desktop.classList.add('hidden');
+  if (mobile) mobile.classList.add('hidden');
+}
+
 // Attach helpers to window for easy inline access
 if (typeof window !== 'undefined') {
   window.nexusAddToCart = addToCart;
   window.nexusAddBundleToCart = addBundleToCart;
   window.nexusOpenCart = openCart;
   window.nexusCloseCart = closeCart;
+  window.nexusHandleSearch = handleSearchSubmit;
 }
 

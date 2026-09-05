@@ -68,10 +68,10 @@
 
   <!-- Header -->
   <header class="sticky top-0 z-40 bg-[#0b0f19]/90 backdrop-blur-md border-b border-slate-800 transition-all">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
       
       <!-- Back to All Products & Brand -->
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-3 shrink-0">
         <a href="index.html" class="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-cyan-400 transition-colors p-2 rounded-lg hover:bg-slate-900 border border-slate-800">
           <i data-lucide="arrow-left" class="w-4 h-4"></i>
           <span class="hidden sm:inline">All Merch</span>
@@ -82,47 +82,80 @@
         </a>
       </div>
 
+      <!-- Search Bar in fandom.html -->
+      <div class="hidden md:flex flex-1 max-w-sm mx-2 relative" id="searchContainer">
+        <div class="relative w-full">
+          <i data-lucide="search" id="searchSubmitBtn" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer hover:text-cyan-400"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Search characters, posters, covers..." 
+            autocomplete="off"
+            class="w-full pl-9 pr-10 py-2 bg-slate-900/90 border border-slate-700/80 rounded-full text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-cyan-500 transition-all shadow-inner"
+          >
+          <kbd class="hidden lg:inline-block absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[9px] font-mono text-slate-400 bg-slate-800 border border-slate-700 rounded">
+            /
+          </kbd>
+        </div>
+        <div id="searchSuggestions" class="absolute top-full left-0 right-0 mt-2 bg-slate-900/95 border border-slate-700/90 rounded-2xl shadow-2xl p-2.5 z-50 hidden backdrop-blur-xl"></div>
+      </div>
+
       <!-- Franchise Switcher Quick Menu -->
-      <div class="hidden md:flex items-center gap-1.5 p-1 bg-slate-900 border border-slate-800 rounded-xl text-xs" id="desktopFranchiseNav">
-        <a href="fandom.html?hero=jjk" data-hero="jjk" class="fandom-nav-link px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all font-semibold">
+      <div class="hidden lg:flex items-center gap-1 p-1 bg-slate-900 border border-slate-800 rounded-xl text-xs shrink-0" id="desktopFranchiseNav">
+        <a href="fandom.html?hero=jjk" data-hero="jjk" class="fandom-nav-link px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all font-semibold">
           ⚡ JJK
         </a>
-        <a href="fandom.html?hero=spiderman" data-hero="spiderman" class="fandom-nav-link px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all font-semibold">
+        <a href="fandom.html?hero=spiderman" data-hero="spiderman" class="fandom-nav-link px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all font-semibold">
           🕷️ Spider-Verse
         </a>
-        <a href="fandom.html?hero=batman" data-hero="batman" class="fandom-nav-link px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all font-semibold">
+        <a href="fandom.html?hero=batman" data-hero="batman" class="fandom-nav-link px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all font-semibold">
           🦇 The Batman
         </a>
-        <a href="fandom.html?hero=demonslayer" data-hero="demonslayer" class="fandom-nav-link px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all font-semibold">
+        <a href="fandom.html?hero=demonslayer" data-hero="demonslayer" class="fandom-nav-link px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all font-semibold">
           🔥 Demon Slayer
         </a>
-        <a href="fandom.html?hero=onepiece" data-hero="onepiece" class="fandom-nav-link px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all font-semibold">
+        <a href="fandom.html?hero=onepiece" data-hero="onepiece" class="fandom-nav-link px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all font-semibold">
           👒 One Piece
         </a>
       </div>
 
       <!-- Right Header Actions -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2.5 shrink-0">
         <button 
           id="navChatBtn" 
-          class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-slate-800/80 border border-cyan-500/30 text-xs font-semibold text-cyan-300 hover:bg-cyan-950/40 hover:border-cyan-400 transition-all"
+          class="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-full bg-slate-800/80 border border-cyan-500/30 text-xs font-semibold text-cyan-300 hover:bg-cyan-950/40 hover:border-cyan-400 transition-all"
         >
           <i data-lucide="bot" class="w-4 h-4 text-cyan-400"></i>
-          <span>Ask Fandom AI</span>
+          <span>AI Wingman</span>
         </button>
 
         <button 
           id="openCartBtn" 
-          class="relative flex items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-medium text-sm transition-all shadow-glow-crimson group"
+          class="relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-medium text-xs transition-all shadow-glow-crimson group"
         >
           <i data-lucide="shopping-bag" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
           <span class="hidden sm:inline font-semibold">Cart</span>
-          <span id="cartBadge" class="w-5 h-5 rounded-full bg-white text-rose-600 text-xs font-black flex items-center justify-center">
+          <span id="cartBadge" class="w-5 h-5 rounded-full bg-white text-rose-600 text-[11px] font-black flex items-center justify-center">
             0
           </span>
         </button>
       </div>
 
+    </div>
+
+    <!-- Mobile Search Bar in fandom.html -->
+    <div class="md:hidden px-4 pb-2 relative" id="mobileSearchContainer">
+      <div class="relative w-full">
+        <i data-lucide="search" id="mobileSearchSubmitBtn" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer hover:text-cyan-400"></i>
+        <input 
+          type="text" 
+          id="mobileSearchInput" 
+          placeholder="Search characters, posters, stickers..." 
+          autocomplete="off"
+          class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-full text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-cyan-500"
+        >
+      </div>
+      <div id="mobileSearchSuggestions" class="absolute top-full left-4 right-4 mt-1 bg-slate-900/95 border border-slate-700/90 rounded-2xl shadow-2xl p-2.5 z-50 hidden backdrop-blur-xl"></div>
     </div>
 
     <!-- Mobile Franchise Switcher -->
@@ -363,127 +396,218 @@
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
 
-      // Read franchise key from URL ?hero=...
       const urlParams = new URLSearchParams(window.location.search);
-      const franchiseKey = urlParams.get('hero') || 'jjk';
-      const franchise = FRANCHISES[franchiseKey] || FRANCHISES['jjk'];
+      const franchiseKey = urlParams.get('hero');
+      const searchQuery = urlParams.get('search');
 
-      // Active state on desktop nav
-      document.querySelectorAll('.fandom-nav-link').forEach(link => {
-        if (link.getAttribute('data-hero') === franchise.id) {
-          link.className = 'fandom-nav-link px-3 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold shadow';
-        }
-      });
+      const headerSearchInput = document.getElementById('searchInput');
+      const headerMobileSearchInput = document.getElementById('mobileSearchInput');
 
-      // Populate Hero Banner
-      document.getElementById('heroUniverseBadge').textContent = `${franchise.universe.toUpperCase()} MULTIVERSE`;
-      document.getElementById('heroTitle').textContent = `${franchise.name} Vault`;
-      document.getElementById('heroQuote').textContent = `"${franchise.quote}"`;
-      document.getElementById('heroQuoteAuthor').textContent = `— ${franchise.quoteAuthor}`;
-      document.getElementById('heroDescription').textContent = franchise.description;
-      document.getElementById('heroCharacterName').textContent = franchise.character;
-      document.getElementById('heroBannerImg').src = franchise.banner;
+      if (searchQuery) {
+        const queryClean = searchQuery.trim();
+        const queryLower = queryClean.toLowerCase();
 
-      // Glow style
-      const glow = document.getElementById('ambientGlow');
-      glow.style.backgroundColor = franchise.accentGlow;
+        if (headerSearchInput) headerSearchInput.value = queryClean;
+        if (headerMobileSearchInput) headerMobileSearchInput.value = queryClean;
 
-      // Populate Bundle Box
-      const bundle = franchise.bundle;
-      document.getElementById('bundleName').textContent = bundle.name;
-      document.getElementById('bundleOrigPrice').textContent = `₹${bundle.originalPrice}`;
-      document.getElementById('bundlePrice').textContent = `₹${bundle.bundlePrice}`;
-      document.getElementById('bundleSavingsBadge').textContent = `Save ₹${bundle.savings} on Bundle`;
+        document.title = `Search: "${queryClean}" | Nexus Pop Vault`;
 
-      const bundleItems = PRODUCTS.filter(p => bundle.productIds.includes(p.id));
-      const bundleContainer = document.getElementById('bundleItemsContainer');
-      bundleContainer.innerHTML = bundleItems.map(item => `
-        <div class="flex items-center gap-3 p-3 rounded-2xl bg-slate-900 border border-slate-800">
-          <img src="${item.image}" alt="${item.name}" class="w-14 h-14 rounded-xl object-cover shrink-0 bg-slate-950">
-          <div class="min-w-0">
-            <span class="text-[10px] font-bold text-rose-400 uppercase">${item.category}</span>
-            <h5 class="text-xs font-semibold text-white truncate">${item.name}</h5>
-            <div class="text-xs font-bold text-cyan-400 mt-0.5">₹${item.price}</div>
-          </div>
-        </div>
-      `).join('');
+        // Search Multiverse Mode
+        document.getElementById('heroUniverseBadge').innerHTML = `<i data-lucide="search" class="w-3.5 h-3.5 inline mr-1 text-cyan-400"></i> SEARCH MULTIVERSE`;
+        document.getElementById('heroTitle').textContent = `Search: "${queryClean}"`;
+        document.getElementById('heroQuote').textContent = `Showing all authentic launch drops matching "${queryClean}".`;
+        document.getElementById('heroQuoteAuthor').textContent = `— Nexus Pop Vault Inventory`;
+        document.getElementById('heroDescription').textContent = `All items crafted with 300+ GSM archival matte stock, 10ft drop armor phone cases, or waterproof vinyl.`;
 
-      // Add Bundle 1-Click Action
-      document.getElementById('addBundleBtn').addEventListener('click', () => {
-        bundleItems.forEach(item => {
-          addToCart(item.id);
+        // Hide bundle box for general search
+        const bundleSec = document.getElementById('fandomBundleSection');
+        if (bundleSec) bundleSec.style.display = 'none';
+
+        // Filter products matching search query
+        const matchingProducts = PRODUCTS.filter(p => {
+          const matchName = p.name.toLowerCase().includes(queryLower);
+          const matchCategory = p.category.toLowerCase().includes(queryLower);
+          const matchUniverse = p.universe.toLowerCase().includes(queryLower);
+          const matchCraft = (p.craftsmanship || '').toLowerCase().includes(queryLower);
+          const matchDesc = p.description.toLowerCase().includes(queryLower);
+          const matchTags = p.tags && p.tags.some(t => t.toLowerCase().includes(queryLower));
+          const matchFranchise = (p.franchiseKey || '').toLowerCase().includes(queryLower);
+          return matchName || matchCategory || matchUniverse || matchCraft || matchDesc || matchTags || matchFranchise;
         });
-        showToast(`🎉 Added ${bundle.name} to your stash! Saved ₹${bundle.savings}!`, 'cyan');
-        openCart();
-      });
 
-      // Filter products for this franchise
-      // Match franchiseKey directly or through franchise tags
-      const franchiseProducts = PRODUCTS.filter(p => {
-        if (p.franchiseKey === franchise.id) return true;
-        const franchiseNameWords = franchise.name.toLowerCase().split(' ');
-        const matchesName = franchiseNameWords.some(w => w.length > 2 && p.tags.some(t => t.toLowerCase().includes(w)));
-        return matchesName;
-      });
+        document.getElementById('heroCharacterName').textContent = `${matchingProducts.length} Items Found`;
+        if (matchingProducts.length > 0) {
+          document.getElementById('heroBannerImg').src = matchingProducts[0].image;
+        }
 
-      document.getElementById('itemCounter').textContent = `${franchiseProducts.length} items`;
+        document.getElementById('itemCounter').textContent = `${matchingProducts.length} items`;
+        renderFandomProducts(matchingProducts, queryClean);
 
-      // Render product grid with realistic launch metadata
-      const grid = document.getElementById('fandomProductGrid');
-      grid.innerHTML = franchiseProducts.map(p => `
-        <div class="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-2xl overflow-hidden shadow-lg transition-all flex flex-col justify-between group">
-          <div class="relative overflow-hidden aspect-[4/3] bg-slate-950">
-            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-950/80 text-rose-300 border border-rose-500/30">
-                ${p.edition}
-              </span>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-950/80 text-amber-300 border border-amber-500/30">
-                ${p.launchStatus}
-              </span>
-            </div>
-            <div class="absolute bottom-3 left-3">
-              <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-950/80 text-slate-300">
-                ${p.category}
-              </span>
+      } else {
+        // Franchise Mode (default or ?hero=...)
+        const heroKey = franchiseKey || 'jjk';
+        const franchise = FRANCHISES[heroKey] || FRANCHISES['jjk'];
+
+        // Active state on desktop nav
+        document.querySelectorAll('.fandom-nav-link').forEach(link => {
+          if (link.getAttribute('data-hero') === franchise.id) {
+            link.className = 'fandom-nav-link px-2.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold shadow';
+          }
+        });
+
+        // Populate Hero Banner
+        document.getElementById('heroUniverseBadge').textContent = `${franchise.universe.toUpperCase()} MULTIVERSE`;
+        document.getElementById('heroTitle').textContent = `${franchise.name} Vault`;
+        document.getElementById('heroQuote').textContent = `"${franchise.quote}"`;
+        document.getElementById('heroQuoteAuthor').textContent = `— ${franchise.quoteAuthor}`;
+        document.getElementById('heroDescription').textContent = franchise.description;
+        document.getElementById('heroCharacterName').textContent = franchise.character;
+        document.getElementById('heroBannerImg').src = franchise.banner;
+
+        // Glow style
+        const glow = document.getElementById('ambientGlow');
+        if (glow) glow.style.backgroundColor = franchise.accentGlow;
+
+        // Populate Bundle Box
+        const bundle = franchise.bundle;
+        document.getElementById('bundleName').textContent = bundle.name;
+        document.getElementById('bundleOrigPrice').textContent = `₹${bundle.originalPrice}`;
+        document.getElementById('bundlePrice').textContent = `₹${bundle.bundlePrice}`;
+        document.getElementById('bundleSavingsBadge').textContent = `Save ₹${bundle.savings} on Bundle`;
+
+        const bundleItems = PRODUCTS.filter(p => bundle.productIds.includes(p.id));
+        const bundleContainer = document.getElementById('bundleItemsContainer');
+        bundleContainer.innerHTML = bundleItems.map(item => `
+          <div class="flex items-center gap-3 p-3 rounded-2xl bg-slate-900 border border-slate-800">
+            <img src="${item.image}" alt="${item.name}" class="w-14 h-14 rounded-xl object-cover shrink-0 bg-slate-950">
+            <div class="min-w-0">
+              <span class="text-[10px] font-bold text-rose-400 uppercase">${item.category}</span>
+              <h5 class="text-xs font-semibold text-white truncate">${item.name}</h5>
+              <div class="text-xs font-bold text-cyan-400 mt-0.5">₹${item.price}</div>
             </div>
           </div>
+        `).join('');
 
-          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
-            <div>
-              <div class="text-[11px] text-cyan-400 font-mono font-semibold mb-1 flex items-center gap-1">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-                ${p.craftsmanship}
+        // Add Bundle 1-Click Action
+        document.getElementById('addBundleBtn').addEventListener('click', () => {
+          bundleItems.forEach(item => {
+            addToCart(item.id);
+          });
+          showToast(`🎉 Added ${bundle.name} to your stash! Saved ₹${bundle.savings}!`, 'cyan');
+          openCart();
+        });
+
+        // Filter products for this franchise
+        const franchiseProducts = PRODUCTS.filter(p => {
+          if (p.franchiseKey === franchise.id) return true;
+          const franchiseNameWords = franchise.name.toLowerCase().split(' ');
+          const matchesName = franchiseNameWords.some(w => w.length > 2 && p.tags.some(t => t.toLowerCase().includes(w)));
+          return matchesName;
+        });
+
+        document.getElementById('itemCounter').textContent = `${franchiseProducts.length} items`;
+        renderFandomProducts(franchiseProducts);
+      }
+
+      function renderFandomProducts(list, emptyQuery = '') {
+        const grid = document.getElementById('fandomProductGrid');
+        if (list.length === 0) {
+          grid.className = 'grid grid-cols-1 gap-6';
+          grid.innerHTML = `
+            <div class="py-16 px-6 text-center bg-slate-900/60 border border-slate-800 rounded-3xl backdrop-blur-sm max-w-2xl mx-auto">
+              <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="search-x" class="w-8 h-8"></i>
               </div>
-              <h4 class="font-display font-bold text-sm text-white line-clamp-2 leading-snug group-hover:text-cyan-400 transition-colors">
-                ${p.name}
-              </h4>
-              <p class="text-slate-400 text-xs line-clamp-2 mt-1.5 leading-relaxed">
-                ${p.description}
+              <h3 class="font-display font-bold text-xl text-white mb-2">No Vault Drops Found for "${emptyQuery}"</h3>
+              <p class="text-slate-400 text-xs sm:text-sm max-w-md mx-auto mb-6 leading-relaxed">
+                We couldn't locate matching merchandise in Launch Batch #01. Try searching for other characters or explore our featured superhero & anime vaults below:
               </p>
+              <div class="flex flex-wrap items-center justify-center gap-2.5">
+                <a href="fandom.html?hero=spiderman" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold flex items-center gap-2 border border-slate-700/80">
+                  <span>🕷️ Spider-Verse</span>
+                </a>
+                <a href="fandom.html?hero=batman" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold flex items-center gap-2 border border-slate-700/80">
+                  <span>🦇 The Batman</span>
+                </a>
+                <a href="fandom.html?hero=jjk" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold flex items-center gap-2 border border-slate-700/80">
+                  <span>⚡ Jujutsu Kaisen</span>
+                </a>
+                <a href="fandom.html?hero=demonslayer" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold flex items-center gap-2 border border-slate-700/80">
+                  <span>🔥 Demon Slayer</span>
+                </a>
+                <a href="fandom.html?hero=onepiece" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold flex items-center gap-2 border border-slate-700/80">
+                  <span>👒 One Piece</span>
+                </a>
+              </div>
+            </div>
+          `;
+          lucide.createIcons();
+          return;
+        }
+
+        grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6';
+        grid.innerHTML = list.map(p => `
+          <div class="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-2xl overflow-hidden shadow-lg transition-all flex flex-col justify-between group">
+            <div class="relative overflow-hidden aspect-[4/3] bg-slate-950">
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-950/80 text-rose-300 border border-rose-500/30">
+                  ${p.edition}
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-950/80 text-amber-300 border border-amber-500/30">
+                  ${p.launchStatus}
+                </span>
+              </div>
+              <div class="absolute bottom-3 left-3">
+                <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-950/80 text-slate-300">
+                  ${p.category}
+                </span>
+              </div>
             </div>
 
-            <div class="pt-3 border-t border-slate-800 flex items-center justify-between gap-3">
+            <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
               <div>
-                <div class="flex items-baseline gap-1.5">
-                  <span class="text-lg font-black font-display text-white">₹${p.price}</span>
-                  <span class="text-xs text-slate-500 line-through">₹${p.originalPrice}</span>
+                <div class="text-[11px] text-cyan-400 font-mono font-semibold mb-1 flex items-center gap-1">
+                  <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                  ${p.craftsmanship}
                 </div>
-                <span class="text-[10px] text-emerald-400 font-semibold">24-Hr Express Dispatch</span>
+                <h4 class="font-display font-bold text-sm text-white line-clamp-2 leading-snug group-hover:text-cyan-400 transition-colors">
+                  ${p.name}
+                </h4>
+                <p class="text-slate-400 text-xs line-clamp-2 mt-1.5 leading-relaxed">
+                  ${p.description}
+                </p>
               </div>
-              <button 
-                data-id="${p.id}" 
-                class="add-to-cart-btn px-3.5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-glow-cyan transition-all"
-              >
-                <i data-lucide="plus" class="w-3.5 h-3.5 stroke-[3]"></i>
-                <span>Add</span>
-              </button>
+
+              <div class="pt-3 border-t border-slate-800 flex items-center justify-between gap-3">
+                <div>
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-lg font-black font-display text-white">₹${p.price}</span>
+                    <span class="text-xs text-slate-500 line-through">₹${p.originalPrice}</span>
+                  </div>
+                  <span class="text-[10px] text-emerald-400 font-semibold">24-Hr Express Dispatch</span>
+                </div>
+                <button 
+                  data-id="${p.id}" 
+                  class="add-to-cart-btn px-3.5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-glow-cyan transition-all"
+                >
+                  <i data-lucide="plus" class="w-3.5 h-3.5 stroke-[3]"></i>
+                  <span>Add</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      `).join('');
+        `).join('');
 
-      lucide.createIcons();
+        grid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.currentTarget.getAttribute('data-id');
+            addToCart(id);
+          });
+        });
+
+        lucide.createIcons();
+      }
     });
   </script>
   <script type="module" src="chatbot.js"></script>

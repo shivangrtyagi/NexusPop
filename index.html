@@ -127,19 +127,22 @@
       </a>
 
       <!-- Search Bar -->
-      <div class="hidden md:flex flex-1 max-w-md mx-4 relative">
+      <div class="hidden md:flex flex-1 max-w-md mx-4 relative" id="searchContainer">
         <div class="relative w-full">
-          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <i data-lucide="search" id="searchSubmitBtn" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 cursor-pointer hover:text-cyan-400 transition-colors"></i>
           <input 
             type="text" 
             id="searchInput" 
-            placeholder="Search characters, posters, covers, stickers..." 
+            placeholder="Search Spider-Man, Batman, Posters, Cases..." 
+            autocomplete="off"
             class="w-full pl-10 pr-12 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-full text-sm text-slate-200 placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all shadow-inner"
           >
           <kbd class="hidden lg:inline-block absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono text-slate-400 bg-slate-800 border border-slate-700 rounded">
             /
           </kbd>
         </div>
+        <!-- Live Suggestions Dropdown -->
+        <div id="searchSuggestions" class="absolute top-full left-0 right-0 mt-2 bg-slate-900/95 border border-slate-700/90 rounded-2xl shadow-2xl p-2.5 z-50 hidden backdrop-blur-xl"></div>
       </div>
 
       <!-- Header Actions -->
@@ -169,16 +172,19 @@
     </div>
 
     <!-- Mobile Search Bar -->
-    <div class="md:hidden px-4 pb-3">
+    <div class="md:hidden px-4 pb-3 relative" id="mobileSearchContainer">
       <div class="relative w-full">
-        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+        <i data-lucide="search" id="mobileSearchSubmitBtn" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 cursor-pointer hover:text-cyan-400"></i>
         <input 
           type="text" 
           id="mobileSearchInput" 
-          placeholder="Search anime, superheroes, stickers..." 
+          placeholder="Search Spider-Man, Anime, Covers..." 
+          autocomplete="off"
           class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-full text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-cyan-500"
         >
       </div>
+      <!-- Mobile Suggestions Dropdown -->
+      <div id="mobileSearchSuggestions" class="absolute top-full left-4 right-4 mt-1 bg-slate-900/95 border border-slate-700/90 rounded-2xl shadow-2xl p-2.5 z-50 hidden backdrop-blur-xl"></div>
     </div>
   </header>
 
