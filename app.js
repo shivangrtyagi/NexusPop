@@ -372,9 +372,6 @@ function renderFilteredCatalog() {
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border ${universeColor}">
               ${product.universe}
             </span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-950/80 text-amber-300 border border-amber-500/30">
-              ${product.badge}
-            </span>
           </div>
 
           <!-- Category pill -->
@@ -394,26 +391,10 @@ function renderFilteredCatalog() {
         <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
           
           <div>
-            <!-- Launch & Craftsmanship Trust Indicator -->
-            <div class="flex items-center justify-between gap-2 mb-2">
-              <span class="text-[11px] font-mono font-semibold text-cyan-400 flex items-center gap-1 truncate" title="${product.craftsmanship}">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-cyan-400 shrink-0"></i>
-                ${product.craftsmanship}
-              </span>
-              <span class="text-[10px] text-slate-400 font-medium shrink-0 bg-slate-800/80 px-1.5 py-0.5 rounded">
-                ${product.edition || 'Batch #01'}
-              </span>
-            </div>
-
             <!-- Title -->
             <h4 class="font-display font-bold text-sm text-white line-clamp-2 leading-snug group-hover:text-cyan-400 transition-colors">
               ${product.name}
             </h4>
-
-            <!-- Short Description -->
-            <p class="text-slate-400 text-xs line-clamp-2 mt-1.5 leading-relaxed">
-              ${product.description}
-            </p>
           </div>
 
           <!-- Price & Add Button Row -->
