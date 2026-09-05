@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Pop | Official Anime, Marvel & DC Pop-Culture Merchandise</title>
+  <meta name="description" content="Shop premium posters, shockproof phone covers, acrylic keychains, and waterproof vinyl stickers from Anime, Marvel, and DC fandoms.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              bg: '#0b0f19',
+              surface: '#111827',
+              surfaceLight: '#1f2937',
+              border: '#374151',
+              cyan: '#06b6d4',
+              cyanGlow: 'rgba(6, 182, 212, 0.3)',
+              crimson: '#f43f5e',
+              crimsonGlow: 'rgba(244, 63, 94, 0.3)',
+              purple: '#a855f7'
+            }
+          },
+          boxShadow: {
+            'glow-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.4)',
+            'glow-crimson': '0 0 25px -5px rgba(244, 63, 94, 0.4)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0f19;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1f2937;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #374151;
+    }
+
+    #chatMessages::-webkit-scrollbar {
+      width: 5px;
+    }
+    #chatMessages::-webkit-scrollbar-track {
+      background: rgba(11, 15, 25, 0.5);
+    }
+    #chatMessages::-webkit-scrollbar-thumb {
+      background: rgba(6, 182, 212, 0.4);
+      border-radius: 4px;
+    }
+    #chatMessages::-webkit-scrollbar-thumb:hover {
+      background: rgba(6, 182, 212, 0.8);
+    }
+
+    /* Hide scrollbar for chips */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Glow utilities */
+    .neon-border-cyan {
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+    }
+    .neon-border-crimson {
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      box-shadow: 0 0 15px rgba(244, 63, 94, 0.15);
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f19] text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-cyan-500 selection:text-black">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-gradient-to-r from-cyan-950 via-slate-900 to-rose-950 border-b border-slate-800 text-xs py-2 px-4 text-center tracking-wide flex items-center justify-center gap-2">
+    <span class="inline-flex items-center gap-1.5 font-semibold text-cyan-400">
+      <i data-lucide="zap" class="w-3.5 h-3.5 fill-cyan-400"></i> FLASH DROP:
+    </span>
+    <span>Free Express Shipping across India on orders over <strong class="text-white">₹999</strong> | Use code <span class="bg-rose-500/20 text-rose-300 font-mono px-2 py-0.5 rounded border border-rose-500/30">NEXUS10</span> for 10% OFF</span>
+  </div>
+
+  <!-- Main Navigation -->
+  <header class="sticky top-0 z-40 bg-[#0b0f19]/90 backdrop-blur-md border-b border-slate-800/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500 via-rose-500 to-purple-600 p-0.5 shadow-glow-cyan group-hover:scale-105 transition-transform duration-300">
+          <div class="w-full h-full bg-[#0b0f19] rounded-[10px] flex items-center justify-center font-display font-black text-xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-rose-400">
+            N
+          </div>
+        </div>
+        <div>
+          <div class="font-display font-black text-2xl tracking-wider text-white flex items-center gap-1">
+            NEXUS<span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-cyan-400">POP</span>
+          </div>
+          <p class="text-[10px] text-slate-400 font-medium tracking-widest uppercase">Anime • Marvel • DC Merch</p>
+        </div>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="hidden md:flex flex-1 max-w-md mx-4 relative">
+        <div class="relative w-full">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Search characters, posters, covers, stickers..." 
+            class="w-full pl-10 pr-12 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-full text-sm text-slate-200 placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all shadow-inner"
+          >
+          <kbd class="hidden lg:inline-block absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono text-slate-400 bg-slate-800 border border-slate-700 rounded">
+            /
+          </kbd>
+        </div>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Quick AI Assistant Trigger -->
+        <button 
+          id="navChatBtn" 
+          class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-slate-800/80 border border-cyan-500/30 text-xs font-semibold text-cyan-300 hover:bg-cyan-950/40 hover:border-cyan-400 transition-all"
+        >
+          <i data-lucide="bot" class="w-4 h-4 text-cyan-400"></i>
+          <span>Ask AI Wingman</span>
+        </button>
+
+        <!-- Cart Button with Live Counter Badge -->
+        <button 
+          id="openCartBtn" 
+          class="relative flex items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-medium text-sm transition-all shadow-glow-crimson group"
+        >
+          <i data-lucide="shopping-bag" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+          <span class="hidden sm:inline font-semibold">Cart</span>
+          <span id="cartBadge" class="w-5 h-5 rounded-full bg-white text-rose-600 text-xs font-black flex items-center justify-center">
+            0
+          </span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Search Bar -->
+    <div class="md:hidden px-4 pb-3">
+      <div class="relative w-full">
+        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+        <input 
+          type="text" 
+          id="mobileSearchInput" 
+          placeholder="Search anime, superheroes, stickers..." 
+          class="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-full text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-cyan-500"
+        >
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden border-b border-slate-800/70 bg-gradient-to-b from-[#0b0f19] via-slate-900/60 to-[#0b0f19]">
+    <!-- Ambient Background Glows -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-10 right-1/4 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left Copy -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-semibold text-slate-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>2026 Multiverse Vault Live</span>
+            <span class="text-slate-500">•</span>
+            <span class="text-cyan-400">All India Delivery</span>
+          </div>
+
+          <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight text-white leading-tight">
+            GEAR UP YOUR <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-rose-400 to-amber-300">FANDOM.</span>
+            <br>
+            OWN THE MULTIVERSE.
+          </h1>
+
+          <p class="text-slate-400 text-base sm:text-lg max-w-xl leading-relaxed">
+            Museum-grade foil posters, drop-proof armor covers, double-acrylic keychains, and weather-resistant vinyl stickers for genuine Otakus, Marvelites, and DC Loyalists.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="#catalogSection" class="px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm tracking-wide transition-all shadow-glow-cyan flex items-center gap-2">
+              <i data-lucide="compass" class="w-4 h-4"></i>
+              Browse Catalog
+            </a>
+            <button id="heroChatTrigger" class="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-500/60 text-slate-200 font-semibold text-sm transition-all flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-4 h-4 text-cyan-400"></i>
+              Get AI Recommendations
+            </button>
+          </div>
+
+          <!-- Quick Trust Bullets -->
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-800/80 max-w-lg text-xs text-slate-400">
+            <div class="flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+              <span>10ft Drop Tested</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="droplet" class="w-4 h-4 text-rose-400 shrink-0"></i>
+              <span>Waterproof Vinyl</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="truck" class="w-4 h-4 text-amber-400 shrink-0"></i>
+              <span>Fast Tracked Dispatch</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Visual Showcase Carousel Card -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative rounded-2xl bg-gradient-to-br from-slate-800/90 to-slate-900/90 p-1 border border-slate-700/80 shadow-2xl">
+            <div class="relative rounded-xl overflow-hidden aspect-[4/3] bg-slate-950">
+              <img 
+                id="heroImage" 
+                src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80" 
+                alt="Nexus Pop Featured Drop" 
+                class="w-full h-full object-cover transition-opacity duration-700"
+              >
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+              
+              <!-- Floating Pill on Image -->
+              <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                <div>
+                  <span class="inline-block px-2.5 py-1 rounded bg-rose-500/90 text-white font-bold text-[10px] tracking-wider uppercase mb-1">
+                    Drop of the Week
+                  </span>
+                  <h4 class="text-white font-display font-bold text-sm sm:text-base drop-shadow-md">
+                    Jujutsu Kaisen: Unlimited Void
+                  </h4>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs text-slate-300 line-through">₹899</span>
+                  <div class="text-base font-black text-cyan-400">₹499</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Universe Quick Toggle Cards -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      
+      <!-- Anime Card -->
+      <button 
+        data-universe="Anime" 
+        class="universe-card text-left p-5 rounded-xl bg-gradient-to-br from-slate-900 to-rose-950/20 border border-slate-800 hover:border-rose-500/60 hover:shadow-glow-crimson transition-all duration-300 group relative overflow-hidden"
+      >
+        <div class="flex items-center justify-between">
+          <span class="text-2xl">⚡</span>
+          <span class="text-[10px] font-bold tracking-widest text-rose-400 uppercase">Shonen & Seinen</span>
+        </div>
+        <h3 class="font-display font-black text-xl text-white group-hover:text-rose-400 transition-colors mt-2">
+          ANIME REALM
+        </h3>
+        <p class="text-xs text-slate-400 mt-1">JJK, Demon Slayer, Attack on Titan, One Piece</p>
+      </button>
+
+      <!-- Marvel Card -->
+      <button 
+        data-universe="Marvel" 
+        class="universe-card text-left p-5 rounded-xl bg-gradient-to-br from-slate-900 to-cyan-950/20 border border-slate-800 hover:border-cyan-500/60 hover:shadow-glow-cyan transition-all duration-300 group relative overflow-hidden"
+      >
+        <div class="flex items-center justify-between">
+          <span class="text-2xl">🛡️</span>
+          <span class="text-[10px] font-bold tracking-widest text-cyan-400 uppercase">Marvel Cinematic</span>
+        </div>
+        <h3 class="font-display font-black text-xl text-white group-hover:text-cyan-400 transition-colors mt-2">
+          MARVEL MULTIVERSE
+        </h3>
+        <p class="text-xs text-slate-400 mt-1">Spider-Man, Iron Man, Deadpool, Avengers</p>
+      </button>
+
+      <!-- DC Card -->
+      <button 
+        data-universe="DC" 
+        class="universe-card text-left p-5 rounded-xl bg-gradient-to-br from-slate-900 to-purple-950/20 border border-slate-800 hover:border-purple-500/60 hover:shadow-md transition-all duration-300 group relative overflow-hidden"
+      >
+        <div class="flex items-center justify-between">
+          <span class="text-2xl">🦇</span>
+          <span class="text-[10px] font-bold tracking-widest text-purple-400 uppercase">Gotham & Beyond</span>
+        </div>
+        <h3 class="font-display font-black text-xl text-white group-hover:text-purple-400 transition-colors mt-2">
+          DC UNIVERSE
+        </h3>
+        <p class="text-xs text-slate-400 mt-1">Batman, The Joker, Flash, Superman</p>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- Dedicated Franchise & Superhero Vaults Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 w-full">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="font-display font-black text-xl sm:text-2xl text-white flex items-center gap-2">
+          <span>Explore Dedicated Franchise Vaults</span>
+          <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">NEW</span>
+        </h2>
+        <p class="text-xs text-slate-400">Step directly into character-specific universes with curated lore, quotes & collector bundle packs</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+      <!-- JJK Card -->
+      <a href="fandom.html?hero=jjk" class="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-rose-500/60 transition-all p-3 sm:p-4 flex flex-col justify-between aspect-[3/4] shadow-md hover:shadow-glow-crimson">
+        <div class="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500" style="background-image: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80')"></div>
+        <div class="relative z-10 flex justify-between items-start">
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-500/90 text-white uppercase">Anime</span>
+          <span class="text-xs text-rose-400 font-mono">⚡</span>
+        </div>
+        <div class="relative z-10 mt-auto">
+          <h4 class="font-display font-black text-sm sm:text-base text-white group-hover:text-rose-300 transition-colors">Jujutsu Kaisen</h4>
+          <p class="text-[11px] text-slate-300 line-clamp-1 mt-0.5">Satoru Gojo & Megumi</p>
+          <span class="text-[10px] text-cyan-400 font-semibold mt-2 inline-flex items-center gap-1">Open Vault →</span>
+        </div>
+      </a>
+
+      <!-- Spider-Verse Card -->
+      <a href="fandom.html?hero=spiderman" class="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-cyan-500/60 transition-all p-3 sm:p-4 flex flex-col justify-between aspect-[3/4] shadow-md hover:shadow-glow-cyan">
+        <div class="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500" style="background-image: url('https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=600&q=80')"></div>
+        <div class="relative z-10 flex justify-between items-start">
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-500/90 text-slate-950 uppercase">Marvel</span>
+          <span class="text-xs text-cyan-400 font-mono">🕷️</span>
+        </div>
+        <div class="relative z-10 mt-auto">
+          <h4 class="font-display font-black text-sm sm:text-base text-white group-hover:text-cyan-300 transition-colors">Spider-Verse</h4>
+          <p class="text-[11px] text-slate-300 line-clamp-1 mt-0.5">Miles Morales Neon Art</p>
+          <span class="text-[10px] text-cyan-400 font-semibold mt-2 inline-flex items-center gap-1">Open Vault →</span>
+        </div>
+      </a>
+
+      <!-- The Batman Card -->
+      <a href="fandom.html?hero=batman" class="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-purple-500/60 transition-all p-3 sm:p-4 flex flex-col justify-between aspect-[3/4] shadow-md hover:shadow-md">
+        <div class="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80')"></div>
+        <div class="relative z-10 flex justify-between items-start">
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-600/90 text-white uppercase">DC</span>
+          <span class="text-xs text-purple-400 font-mono">🦇</span>
+        </div>
+        <div class="relative z-10 mt-auto">
+          <h4 class="font-display font-black text-sm sm:text-base text-white group-hover:text-purple-300 transition-colors">The Batman</h4>
+          <p class="text-[11px] text-slate-300 line-clamp-1 mt-0.5">Gotham Noir Tactical</p>
+          <span class="text-[10px] text-purple-400 font-semibold mt-2 inline-flex items-center gap-1">Open Vault →</span>
+        </div>
+      </a>
+
+      <!-- Demon Slayer Card -->
+      <a href="fandom.html?hero=demonslayer" class="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-amber-500/60 transition-all p-3 sm:p-4 flex flex-col justify-between aspect-[3/4] shadow-md hover:shadow-md">
+        <div class="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500" style="background-image: url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80')"></div>
+        <div class="relative z-10 flex justify-between items-start">
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/90 text-slate-950 uppercase">Anime</span>
+          <span class="text-xs text-amber-400 font-mono">🔥</span>
+        </div>
+        <div class="relative z-10 mt-auto">
+          <h4 class="font-display font-black text-sm sm:text-base text-white group-hover:text-amber-300 transition-colors">Demon Slayer</h4>
+          <p class="text-[11px] text-slate-300 line-clamp-1 mt-0.5">Hinokami Kagura Drops</p>
+          <span class="text-[10px] text-amber-400 font-semibold mt-2 inline-flex items-center gap-1">Open Vault →</span>
+        </div>
+      </a>
+
+      <!-- One Piece Card -->
+      <a href="fandom.html?hero=onepiece" class="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-rose-500/60 transition-all p-3 sm:p-4 flex flex-col justify-between aspect-[3/4] shadow-md hover:shadow-glow-crimson col-span-2 sm:col-span-1">
+        <div class="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500" style="background-image: url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80')"></div>
+        <div class="relative z-10 flex justify-between items-start">
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-500/90 text-white uppercase">Anime</span>
+          <span class="text-xs text-rose-400 font-mono">👒</span>
+        </div>
+        <div class="relative z-10 mt-auto">
+          <h4 class="font-display font-black text-sm sm:text-base text-white group-hover:text-rose-300 transition-colors">One Piece</h4>
+          <p class="text-[11px] text-slate-300 line-clamp-1 mt-0.5">Gear 5 Sun God Nika</p>
+          <span class="text-[10px] text-cyan-400 font-semibold mt-2 inline-flex items-center gap-1">Open Vault →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Catalog Section -->
+  <main id="catalogSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
+    
+    <!-- Filter Toolbar -->
+    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-8 backdrop-blur-md space-y-4">
+      
+      <!-- Top row: Category Tabs and Sort dropdown -->
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        
+        <!-- Category Filter Pills -->
+        <div class="flex flex-wrap items-center gap-2" id="categoryPills">
+          <button data-category="All" class="cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-950 transition-all">
+            All Items
+          </button>
+          <button data-category="Posters" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-all">
+            🖼️ Posters
+          </button>
+          <button data-category="Phone Covers" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-all">
+            📱 Phone Covers
+          </button>
+          <button data-category="Acrylic Keychains" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-all">
+            🔑 Acrylic Keychains
+          </button>
+          <button data-category="Vinyl Stickers" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-all">
+            ✨ Vinyl Stickers
+          </button>
+        </div>
+
+        <!-- Sort by Selector -->
+        <div class="flex items-center gap-2 self-end md:self-auto w-full md:w-auto justify-between md:justify-start">
+          <span class="text-xs text-slate-400 flex items-center gap-1">
+            <i data-lucide="arrow-up-down" class="w-3.5 h-3.5"></i> Sort:
+          </span>
+          <select id="sortBy" class="bg-slate-800 border border-slate-700 text-xs rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:border-cyan-500">
+            <option value="featured">Featured / Best Match</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Highest Rated</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Secondary Filter Row: Universe Sub-selection & Result Counter -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-800/80 text-xs">
+        <div class="flex items-center gap-2" id="universePills">
+          <span class="text-slate-400 mr-1">Fandom:</span>
+          <button data-fandom="All" class="fandom-pill px-2.5 py-1 rounded bg-slate-800 text-cyan-400 font-semibold border border-cyan-500/40">
+            All
+          </button>
+          <button data-fandom="Anime" class="fandom-pill px-2.5 py-1 rounded bg-slate-800/60 text-slate-400 hover:text-rose-400 font-medium">
+            Anime
+          </button>
+          <button data-fandom="Marvel" class="fandom-pill px-2.5 py-1 rounded bg-slate-800/60 text-slate-400 hover:text-cyan-400 font-medium">
+            Marvel
+          </button>
+          <button data-fandom="DC" class="fandom-pill px-2.5 py-1 rounded bg-slate-800/60 text-slate-400 hover:text-purple-400 font-medium">
+            DC
+          </button>
+        </div>
+
+        <div id="productCounter" class="text-slate-400 font-medium">
+          Showing <span class="text-white font-bold" id="itemCount">0</span> products
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <!-- Products dynamically injected by app.js -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyCatalog" class="hidden text-center py-16 bg-slate-900/50 border border-slate-800 rounded-2xl p-8">
+      <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-800 flex items-center justify-center text-slate-400">
+        <i data-lucide="package-x" class="w-8 h-8"></i>
+      </div>
+      <h3 class="font-display font-bold text-xl text-white mb-1">No items found</h3>
+      <p class="text-slate-400 text-sm max-w-sm mx-auto mb-4">No merchandise matched your search and filter criteria. Try resetting filters.</p>
+      <button id="resetFiltersBtn" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs">
+        Reset All Filters
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Persistent Slide-Over Cart Drawer -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
+    <!-- Backdrop Overlay -->
+    <div id="cartBackdrop" class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity"></div>
+    
+    <!-- Drawer Panel -->
+    <div id="cartPanel" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-slate-900 border-l border-slate-800 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 pointer-events-auto">
+      
+      <!-- Drawer Header -->
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-rose-500"></i>
+          <h3 class="font-display font-bold text-lg text-white">Your Fandom Stash</h3>
+          <span id="cartHeaderCount" class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">0 items</span>
+        </div>
+        <button id="closeCartBtn" class="p-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" aria-label="Close cart">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Free Shipping Threshold Meter -->
+      <div class="bg-slate-950 px-5 py-3 border-b border-slate-800/80 text-xs">
+        <div class="flex items-center justify-between text-slate-300 mb-1.5 font-medium" id="shippingProgressText">
+          <span>Add ₹999 for Free Express Shipping</span>
+          <span class="text-cyan-400 font-bold">₹0 / ₹999</span>
+        </div>
+        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+          <div id="shippingProgressBar" class="bg-gradient-to-r from-rose-500 to-cyan-400 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Cart Item List -->
+      <div id="cartItemList" class="flex-1 overflow-y-auto p-5 space-y-4">
+        <!-- Injected via app.js -->
+      </div>
+
+      <!-- Empty Cart Message -->
+      <div id="cartEmptyState" class="hidden flex-1 flex flex-col items-center justify-center p-8 text-center">
+        <div class="w-16 h-16 rounded-full bg-slate-800/80 flex items-center justify-center text-slate-500 mb-4">
+          <i data-lucide="ghost" class="w-8 h-8"></i>
+        </div>
+        <h4 class="font-display font-bold text-white text-base mb-1">Your vault is empty!</h4>
+        <p class="text-slate-400 text-xs max-w-xs mb-4">You haven't added any awesome posters, cases, or stickers yet.</p>
+        <button id="shopNowBtn" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs">
+          Explore Best Sellers
+        </button>
+      </div>
+
+      <!-- Drawer Footer -->
+      <div id="cartFooter" class="p-5 border-t border-slate-800 bg-slate-950/90 space-y-3">
+        
+        <!-- Promo Code Input -->
+        <div class="flex gap-2">
+          <div class="relative flex-1">
+            <input 
+              type="text" 
+              id="couponInput" 
+              placeholder="Promo Code (Try NEXUS10)" 
+              class="w-full uppercase px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+            >
+          </div>
+          <button id="applyCouponBtn" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold">
+            Apply
+          </button>
+        </div>
+        <div id="couponMessage" class="text-[11px] hidden"></div>
+
+        <!-- Cost Breakdown -->
+        <div class="space-y-1.5 text-xs text-slate-400 pt-2">
+          <div class="flex justify-between">
+            <span>Subtotal</span>
+            <span id="cartSubtotal" class="font-semibold text-slate-200">₹0</span>
+          </div>
+          <div class="flex justify-between" id="discountRow" style="display: none;">
+            <span class="text-emerald-400">Coupon Discount (10%)</span>
+            <span id="cartDiscount" class="font-semibold text-emerald-400">-₹0</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Estimated Shipping</span>
+            <span id="cartShipping" class="font-semibold text-slate-200">₹49</span>
+          </div>
+          <div class="flex justify-between text-sm font-bold text-white pt-2 border-t border-slate-800">
+            <span>Grand Total</span>
+            <span id="cartGrandTotal" class="text-cyan-400 font-display font-black text-base">₹0</span>
+          </div>
+        </div>
+
+        <!-- Checkout Action Button -->
+        <a 
+          href="checkout.html" 
+          id="checkoutBtn" 
+          class="block w-full py-3.5 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-bold text-center text-sm shadow-glow-crimson transition-all"
+        >
+          Proceed to Checkout
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AI Shopping Assistant Floating Widget -->
+  <div id="aiChatWidget" class="fixed bottom-6 right-6 z-40 flex flex-col items-end">
+    
+    <!-- Expanded Chat Container -->
+    <div 
+      id="chatPanel" 
+      class="hidden flex-col w-[92vw] sm:w-[390px] h-[520px] max-h-[82vh] bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden mb-3 transition-all duration-300 neon-border-cyan backdrop-blur-xl"
+    >
+      <!-- Chat Header -->
+      <div class="shrink-0 px-4 py-3 bg-gradient-to-r from-slate-950 via-slate-900 to-cyan-950/80 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="relative">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-rose-500 p-0.5">
+              <div class="w-full h-full bg-slate-900 rounded-full flex items-center justify-center text-cyan-400">
+                <i data-lucide="bot" class="w-4 h-4"></i>
+              </div>
+            </div>
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-slate-900"></span>
+          </div>
+          <div>
+            <h4 class="font-display font-bold text-sm text-white flex items-center gap-1.5">
+              Nexus Jarvis
+              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">AI WINGMAN</span>
+            </h4>
+            <p class="text-[10px] text-slate-400">Fandom recommendations & cart advice</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1">
+          <button id="clearChatBtn" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors" title="Clear chat history">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+          <button id="closeChatBtn" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors" title="Minimize">
+            <i data-lucide="minus" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Prompt Suggestion Chips -->
+      <div class="shrink-0 p-2.5 bg-slate-950/70 border-b border-slate-800/80 overflow-x-auto flex gap-1.5 no-scrollbar text-[11px]">
+        <button class="chat-chip px-2.5 py-1 rounded-full bg-slate-800/90 hover:bg-slate-700 text-slate-300 shrink-0 transition-colors border border-slate-700/60">
+          🔥 Trending anime merch
+        </button>
+        <button class="chat-chip px-2.5 py-1 rounded-full bg-slate-800/90 hover:bg-slate-700 text-slate-300 shrink-0 transition-colors border border-slate-700/60">
+          🕷️ Spider-Man under ₹500
+        </button>
+        <button class="chat-chip px-2.5 py-1 rounded-full bg-slate-800/90 hover:bg-slate-700 text-slate-300 shrink-0 transition-colors border border-slate-700/60">
+          🎁 Gift combo recommendation
+        </button>
+        <button class="chat-chip px-2.5 py-1 rounded-full bg-slate-800/90 hover:bg-slate-700 text-slate-300 shrink-0 transition-colors border border-slate-700/60">
+          🛒 Check my cart & shipping
+        </button>
+      </div>
+
+      <!-- Messages History Container -->
+      <div id="chatMessages" class="flex-1 min-h-0 overflow-y-auto p-4 space-y-3 text-xs overscroll-contain">
+        <!-- Messages injected via chatbot.js -->
+      </div>
+
+      <!-- Typing Indicator -->
+      <div id="typingIndicator" class="shrink-0 hidden px-4 py-2 text-[11px] text-cyan-400 italic flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-bounce"></span>
+        <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style="animation-delay: 0.15s"></span>
+        <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style="animation-delay: 0.3s"></span>
+        <span>Nexus Jarvis is searching the multiverse...</span>
+      </div>
+
+      <!-- Chat Input Area -->
+      <form id="chatForm" class="shrink-0 p-3 bg-slate-950 border-t border-slate-800 flex items-center gap-2">
+        <input 
+          type="text" 
+          id="chatInput" 
+          placeholder="Ask for recommendations, budget picks, trivia..." 
+          class="flex-1 px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500"
+          autocomplete="off"
+        >
+        <button 
+          type="submit" 
+          id="sendChatBtn" 
+          class="w-9 h-9 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 flex items-center justify-center shrink-0 transition-all font-bold"
+          aria-label="Send message"
+        >
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </div>
+
+    <!-- Floating Trigger Button -->
+    <button 
+      id="openChatBtn" 
+      class="relative p-3.5 rounded-full bg-gradient-to-r from-cyan-500 to-rose-500 hover:from-cyan-400 hover:to-rose-400 text-slate-950 shadow-glow-cyan hover:scale-105 transition-all duration-300 group flex items-center gap-2 font-bold text-xs"
+      aria-label="Open AI Shopping Assistant"
+    >
+      <div class="relative">
+        <i data-lucide="sparkles" class="w-5 h-5 text-slate-950"></i>
+      </div>
+      <span class="hidden sm:inline text-slate-950 font-black">AI Wingman</span>
+      <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-rose-500 border-2 border-[#0b0f19]"></span>
+    </button>
+
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div id="toastContainer" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Real Brand Trust & Craftsmanship Guarantee Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full border-t border-slate-800/80">
+    <div class="bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
+      <div class="max-w-3xl mb-8">
+        <span class="text-xs font-mono font-bold text-rose-400 uppercase tracking-widest block mb-2">
+          THE NEXUS POP DIFFERENCE
+        </span>
+        <h3 class="font-display font-black text-2xl sm:text-3xl text-white">
+          Forged For Enthusiasts. Crafted Without Compromise.
+        </h3>
+        <p class="text-slate-400 text-sm mt-2 leading-relaxed">
+          We started Nexus Pop because cheap prints and flimsy sticker paper from mass drops ruin great art. Every piece in our Batch #01 is produced with archival materials built to last a lifetime.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-2">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-display font-bold text-white text-sm">300+ GSM Archival Matte</h4>
+          <p class="text-xs text-slate-400">Zero glare, deep saturated blacks, and metallic hot-stamped foil highlights.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-2">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center">
+            <i data-lucide="shield" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-display font-bold text-white text-sm">10ft Drop Armor Tech</h4>
+          <p class="text-xs text-slate-400">Shock-absorbing TPU internal bumpers with raised camera rims and tactile grips.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-2">
+          <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center">
+            <i data-lucide="droplet" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-display font-bold text-white text-sm">100% Dishwasher Vinyl</h4>
+          <p class="text-xs text-slate-400">Weatherproof matte shield film with residue-free repositionable adhesive.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-2">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center">
+            <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-display font-bold text-white text-sm">7-Day Hassle-Free Return</h4>
+          <p class="text-xs text-slate-400">Not completely thrilled with the print quality? We will replace or refund it instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 border-t border-slate-800/80 mt-8 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div class="space-y-3">
+          <div class="font-display font-black text-xl tracking-wider text-white">
+            NEXUS<span class="text-rose-500">POP</span>
+          </div>
+          <p class="leading-relaxed">India's premier pop-culture destination for official-grade anime, Marvel, and DC accessories. Designed by passionate fans for genuine enthusiasts.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-bold uppercase tracking-wider mb-3">Shop Universes</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-cyan-400">Jujutsu Kaisen & Demon Slayer</a></li>
+            <li><a href="#" class="hover:text-cyan-400">Spider-Verse & MCU</a></li>
+            <li><a href="#" class="hover:text-cyan-400">Batman & The Dark Knight</a></li>
+            <li><a href="#" class="hover:text-cyan-400">One Piece Gear 5 Drops</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold uppercase tracking-wider mb-3">Categories</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-cyan-400">Archival 300 GSM Foil Posters</a></li>
+            <li><a href="#" class="hover:text-cyan-400">10ft Drop Armor Phone Cases</a></li>
+            <li><a href="#" class="hover:text-cyan-400">Laser-Cut Acrylic Keychains</a></li>
+            <li><a href="#" class="hover:text-cyan-400">100% Waterproof Vinyl Stickers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold uppercase tracking-wider mb-3">Accepted Payment Modes</h4>
+          <p class="mb-3 text-slate-500">Instant UPI (GPay, PhonePe, Paytm), RuPay, Visa, Mastercard, and Cash on Delivery.</p>
+          <div class="flex items-center gap-2 text-slate-300 font-mono text-[10px]">
+            <span class="px-2 py-1 bg-slate-900 border border-slate-800 rounded">UPI</span>
+            <span class="px-2 py-1 bg-slate-900 border border-slate-800 rounded">Cards</span>
+            <span class="px-2 py-1 bg-slate-900 border border-slate-800 rounded">COD</span>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-slate-800/80 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500">
+        <p>© 2026 Nexus Pop Inc. All fandom trademarks belong to their respective creators.</p>
+        <p class="flex items-center gap-1">Powered by <span class="text-cyan-400 font-semibold">Google Gemini API</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="data.js"></script>
+  <script type="module" src="app.js"></script>
+  <script type="module" src="chatbot.js"></script>
+</body>
+</html>

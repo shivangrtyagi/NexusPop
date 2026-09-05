@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Nexus Pop Store</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              bg: '#0b0f19',
+              surface: '#111827',
+              border: '#374151',
+              cyan: '#06b6d4',
+              crimson: '#f43f5e'
+            }
+          },
+          boxShadow: {
+            'glow-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.4)',
+            'glow-crimson': '0 0 25px -5px rgba(244, 63, 94, 0.4)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-[#0b0f19] text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-cyan-500 selection:text-black">
+
+  <!-- Minimal Checkout Header -->
+  <header class="border-b border-slate-800 bg-[#0b0f19]/90 backdrop-blur-md sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 group">
+        <i data-lucide="arrow-left" class="w-4 h-4 text-slate-400 group-hover:text-cyan-400 group-hover:-translate-x-0.5 transition-all"></i>
+        <div class="font-display font-black text-xl text-white">
+          NEXUS<span class="text-rose-500">POP</span>
+        </div>
+      </a>
+      <div class="flex items-center gap-2 text-xs text-slate-400">
+        <i data-lucide="lock" class="w-3.5 h-3.5 text-emerald-400"></i>
+        <span>256-bit Encrypted Checkout</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stepper Indicator -->
+  <div class="max-w-3xl mx-auto px-4 py-8 w-full">
+    <div class="flex items-center justify-between relative">
+      <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-0.5 bg-slate-800 -z-0"></div>
+      
+      <!-- Step 1 Indicator -->
+      <div class="flex flex-col items-center gap-1.5 relative z-10" id="step1Indicator">
+        <div class="w-9 h-9 rounded-full bg-cyan-500 text-slate-950 font-black text-sm flex items-center justify-center shadow-glow-cyan">
+          1
+        </div>
+        <span class="text-xs font-bold text-cyan-400">Shipping Details</span>
+      </div>
+
+      <!-- Step 2 Indicator -->
+      <div class="flex flex-col items-center gap-1.5 relative z-10" id="step2Indicator">
+        <div class="w-9 h-9 rounded-full bg-slate-800 text-slate-400 font-black text-sm flex items-center justify-center border border-slate-700">
+          2
+        </div>
+        <span class="text-xs font-medium text-slate-400">Payment Mode</span>
+      </div>
+
+      <!-- Step 3 Indicator -->
+      <div class="flex flex-col items-center gap-1.5 relative z-10" id="step3Indicator">
+        <div class="w-9 h-9 rounded-full bg-slate-800 text-slate-400 font-black text-sm flex items-center justify-center border border-slate-700">
+          3
+        </div>
+        <span class="text-xs font-medium text-slate-400">Confirmation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Checkout Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 pb-16 w-full flex-1">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Column: Checkout Forms (Steps 1 & 2) -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- STEP 1: Address Form -->
+        <section id="shippingSection" class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+            <h2 class="font-display font-bold text-xl text-white flex items-center gap-2">
+              <i data-lucide="map-pin" class="w-5 h-5 text-cyan-400"></i>
+              Shipping Address
+            </h2>
+            <span class="text-xs text-slate-400">Delivery in 2-4 business days</span>
+          </div>
+
+          <form id="addressForm" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Full Name *</label>
+                <input 
+                  type="text" 
+                  id="fullName" 
+                  required 
+                  placeholder="e.g. Arjun Sharma" 
+                  class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                >
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Mobile Number *</label>
+                <div class="flex">
+                  <span class="inline-flex items-center px-3 rounded-l-xl border border-r-0 border-slate-700 bg-slate-800 text-slate-400 text-xs font-medium">
+                    +91
+                  </span>
+                  <input 
+                    type="tel" 
+                    id="phone" 
+                    required 
+                    pattern="[6-9][0-9]{9}" 
+                    maxlength="10" 
+                    placeholder="9876543210" 
+                    class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-r-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Email Address (For Order Tracking) *</label>
+              <input 
+                type="email" 
+                id="email" 
+                required 
+                placeholder="arjun.sharma@example.com" 
+                class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+              >
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Pincode *</label>
+                <input 
+                  type="text" 
+                  id="pincode" 
+                  required 
+                  maxlength="6" 
+                  placeholder="110001" 
+                  class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                >
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1.5">City *</label>
+                <input 
+                  type="text" 
+                  id="city" 
+                  required 
+                  placeholder="New Delhi" 
+                  class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                >
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1.5">State *</label>
+                <input 
+                  type="text" 
+                  id="state" 
+                  required 
+                  placeholder="Delhi" 
+                  class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                >
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">House / Flat No., Building, Street *</label>
+              <input 
+                type="text" 
+                id="addressLine" 
+                required 
+                placeholder="Flat 402, Skyline Residency, Sector 14" 
+                class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+              >
+            </div>
+
+            <!-- Delivery Speed Choice -->
+            <div class="pt-2">
+              <label class="block text-xs font-semibold text-slate-300 mb-2">Shipping Preference</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <label class="flex items-center gap-3 p-3 rounded-xl border border-cyan-500/50 bg-cyan-950/20 cursor-pointer">
+                  <input type="radio" name="shippingSpeed" value="standard" checked class="text-cyan-500 focus:ring-0">
+                  <div class="text-xs">
+                    <span class="font-bold text-white block">Standard Tracked</span>
+                    <span class="text-slate-400 text-[11px]">3-5 Business Days (Free over ₹999)</span>
+                  </div>
+                </label>
+                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-800 bg-slate-800/40 cursor-pointer hover:border-slate-700">
+                  <input type="radio" name="shippingSpeed" value="express" class="text-cyan-500 focus:ring-0">
+                  <div class="text-xs">
+                    <span class="font-bold text-white block">Priority Express (Air)</span>
+                    <span class="text-slate-400 text-[11px]">1-2 Business Days (+₹50)</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              class="w-full py-3.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm tracking-wide shadow-glow-cyan transition-all flex items-center justify-center gap-2 mt-4"
+            >
+              Continue to Payment
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </form>
+        </section>
+
+        <!-- STEP 2: Indian Payment Methods Form -->
+        <section id="paymentSection" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+            <div>
+              <h2 class="font-display font-bold text-xl text-white flex items-center gap-2">
+                <i data-lucide="credit-card" class="w-5 h-5 text-rose-500"></i>
+                Select Payment Mode
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5">Instant confirmation across all Indian payment rails</p>
+            </div>
+            <button id="backToAddressBtn" class="text-xs text-cyan-400 hover:underline flex items-center gap-1">
+              <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Edit Address
+            </button>
+          </div>
+
+          <!-- Payment Tabs -->
+          <div class="grid grid-cols-3 gap-2 p-1 bg-slate-950 rounded-xl border border-slate-800 text-xs">
+            <button id="tabUpi" class="pay-tab py-2.5 rounded-lg font-bold bg-cyan-500 text-slate-950 shadow transition-all">
+              ⚡ UPI (QR / VPA)
+            </button>
+            <button id="tabCards" class="pay-tab py-2.5 rounded-lg font-semibold text-slate-400 hover:text-white transition-all">
+              💳 Cards (Debit/Credit)
+            </button>
+            <button id="tabCod" class="pay-tab py-2.5 rounded-lg font-semibold text-slate-400 hover:text-white transition-all">
+              💵 Cash on Delivery
+            </button>
+          </div>
+
+          <!-- Method 1: UPI Simulated Container -->
+          <div id="upiMethod" class="space-y-4 pt-2">
+            <div class="p-5 rounded-xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row items-center gap-6">
+              <!-- QR Code Mockup -->
+              <div class="flex flex-col items-center gap-2 shrink-0">
+                <div class="w-40 h-40 bg-white p-2.5 rounded-xl shadow-md flex items-center justify-center relative group">
+                  <!-- Simulated SVG QR Graphic -->
+                  <svg viewBox="0 0 100 100" class="w-full h-full text-slate-950 fill-current">
+                    <rect x="0" y="0" width="30" height="30" rx="3" />
+                    <rect x="5" y="5" width="20" height="20" fill="white" />
+                    <rect x="9" y="9" width="12" height="12" />
+                    
+                    <rect x="70" y="0" width="30" height="30" rx="3" />
+                    <rect x="75" y="5" width="20" height="20" fill="white" />
+                    <rect x="79" y="9" width="12" height="12" />
+
+                    <rect x="0" y="70" width="30" height="30" rx="3" />
+                    <rect x="5" y="75" width="20" height="20" fill="white" />
+                    <rect x="9" y="79" width="12" height="12" />
+
+                    <!-- Data dots -->
+                    <rect x="36" y="8" width="6" height="6" />
+                    <rect x="48" y="16" width="6" height="6" />
+                    <rect x="36" y="24" width="6" height="6" />
+                    <rect x="56" y="8" width="6" height="6" />
+                    <rect x="8" y="36" width="6" height="6" />
+                    <rect x="20" y="44" width="6" height="6" />
+                    <rect x="36" y="44" width="14" height="14" />
+                    <rect x="56" y="36" width="6" height="6" />
+                    <rect x="70" y="44" width="12" height="6" />
+                    <rect x="86" y="36" width="6" height="6" />
+                    <rect x="36" y="70" width="6" height="6" />
+                    <rect x="48" y="78" width="6" height="6" />
+                    <rect x="56" y="86" width="6" height="6" />
+                    <rect x="70" y="70" width="14" height="14" />
+                    <rect x="88" y="78" width="6" height="6" />
+                  </svg>
+                  <div class="absolute inset-0 bg-slate-900/10 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[10px] text-slate-950 font-bold">
+                    Scan with UPI
+                  </div>
+                </div>
+                <span class="text-[11px] text-emerald-400 font-mono font-bold flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                  GPay • PhonePe • Paytm • BHIM
+                </span>
+              </div>
+
+              <!-- UPI ID Alternative -->
+              <div class="flex-1 w-full space-y-3 text-xs">
+                <div>
+                  <h4 class="font-bold text-white text-sm mb-1">Scan QR or Enter Virtual Payment Address (VPA)</h4>
+                  <p class="text-slate-400 text-xs">Open your preferred UPI app on mobile to approve payment instantly.</p>
+                </div>
+                <div>
+                  <label class="block text-slate-300 font-semibold mb-1">UPI ID / VPA</label>
+                  <div class="flex gap-2">
+                    <input 
+                      type="text" 
+                      id="upiIdInput" 
+                      placeholder="e.g. yourname@oksbi" 
+                      class="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 text-xs font-mono"
+                    >
+                    <button type="button" id="verifyUpiBtn" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-cyan-400 font-bold rounded-lg border border-slate-700 text-xs">
+                      Verify
+                    </button>
+                  </div>
+                  <div id="upiVerifyStatus" class="text-[11px] mt-1 text-slate-400">Supported handles: @okhdfcbank, @okaxis, @ybl, @paytm</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Method 2: Cards Container -->
+          <div id="cardsMethod" class="hidden space-y-4 pt-2">
+            <div class="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Card Number</label>
+                <div class="relative">
+                  <input 
+                    type="text" 
+                    id="cardNumber" 
+                    maxlength="19" 
+                    placeholder="4532 0000 0000 8921" 
+                    class="w-full pl-3.5 pr-12 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                  >
+                  <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs">
+                    RuPay / Visa
+                  </span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">Expiry (MM/YY)</label>
+                  <input 
+                    type="text" 
+                    id="cardExpiry" 
+                    maxlength="5" 
+                    placeholder="12/28" 
+                    class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                  >
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">CVV / CVC</label>
+                  <input 
+                    type="password" 
+                    id="cardCvv" 
+                    maxlength="3" 
+                    placeholder="•••" 
+                    class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                  >
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Name on Card</label>
+                <input 
+                  type="text" 
+                  id="cardName" 
+                  placeholder="Arjun Sharma" 
+                  class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Method 3: COD Container -->
+          <div id="codMethod" class="hidden space-y-4 pt-2">
+            <div class="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+              <div class="flex items-start gap-3">
+                <i data-lucide="banknote" class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5"></i>
+                <div class="text-xs space-y-1">
+                  <h4 class="font-bold text-white text-sm">Cash on Delivery Available</h4>
+                  <p class="text-slate-400 leading-relaxed">
+                    You can pay in cash or via any UPI app directly to the delivery courier at your doorstep. We will send a quick WhatsApp confirmation before packing your merch.
+                  </p>
+                  <span class="inline-block mt-2 px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 font-semibold text-[11px] border border-emerald-500/30">
+                    No COD Convenience Fee!
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Complete Order CTA -->
+          <button 
+            id="placeOrderBtn" 
+            class="w-full py-4 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-display font-black text-base tracking-wide shadow-glow-crimson transition-all flex items-center justify-center gap-2"
+          >
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+            <span id="placeOrderBtnText">Pay ₹0 & Confirm Order</span>
+          </button>
+        </section>
+
+      </div>
+
+      <!-- Right Column: Order Summary Sidebar -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl sticky top-24 space-y-5">
+          
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="font-display font-bold text-base text-white flex items-center gap-2">
+              <i data-lucide="shopping-bag" class="w-4 h-4 text-cyan-400"></i>
+              Order Summary
+            </h3>
+            <span id="summaryItemCount" class="text-xs text-slate-400">0 items</span>
+          </div>
+
+          <!-- Item list in summary -->
+          <div id="summaryItemList" class="max-h-60 overflow-y-auto space-y-3 pr-1 text-xs">
+            <!-- Dynamically populated from localStorage -->
+          </div>
+
+          <!-- Promo Code Bar -->
+          <div class="pt-2">
+            <div class="flex gap-2">
+              <input 
+                type="text" 
+                id="summaryCouponInput" 
+                placeholder="Code (NEXUS10)" 
+                class="flex-1 uppercase px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 font-mono"
+              >
+              <button id="summaryApplyCouponBtn" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-cyan-400 font-bold border border-slate-700 rounded-lg text-xs">
+                Apply
+              </button>
+            </div>
+            <div id="summaryCouponMsg" class="text-[11px] mt-1 hidden"></div>
+          </div>
+
+          <!-- Total Calculation breakdown -->
+          <div class="border-t border-slate-800 pt-3 space-y-2 text-xs text-slate-400">
+            <div class="flex justify-between">
+              <span>Merchandise Subtotal</span>
+              <span id="summarySubtotal" class="font-semibold text-slate-200">₹0</span>
+            </div>
+            <div class="flex justify-between" id="summaryDiscountRow" style="display: none;">
+              <span class="text-emerald-400">Special Promo (10%)</span>
+              <span id="summaryDiscount" class="font-semibold text-emerald-400">-₹0</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Express Delivery</span>
+              <span id="summaryShipping" class="font-semibold text-slate-200">₹49</span>
+            </div>
+            <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-slate-800">
+              <span>Total Payable</span>
+              <span id="summaryGrandTotal" class="text-cyan-400 font-display font-black text-lg">₹0</span>
+            </div>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="pt-3 border-t border-slate-800/80 grid grid-cols-2 gap-2 text-[11px] text-slate-400">
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
+              <span>Authentic Fandom Merch</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-cyan-400 shrink-0"></i>
+              <span>7-Day Easy Return</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- STEP 3: Order Confirmation Modal -->
+  <div id="orderConfirmationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full text-center space-y-6 shadow-2xl relative">
+      
+      <!-- Animated checkmark badge -->
+      <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-cyan-500 to-emerald-400 p-1 shadow-glow-cyan animate-bounce">
+        <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center text-cyan-400">
+          <i data-lucide="check" class="w-10 h-10 text-emerald-400 stroke-[3]"></i>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
+          Payment Successful & Verified
+        </span>
+        <h3 class="font-display font-black text-2xl text-white">Order Confirmed!</h3>
+        <p class="text-xs text-slate-400">
+          Your fandom treasure is secured! We've dispatched a confirmation receipt and WhatsApp tracking update.
+        </p>
+      </div>
+
+      <!-- Order Details Card -->
+      <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-left text-xs space-y-2.5">
+        <div class="flex justify-between pb-2 border-b border-slate-800">
+          <span class="text-slate-400">Order ID:</span>
+          <span id="confirmedOrderId" class="font-mono font-bold text-cyan-400">#NX-98241</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Delivery To:</span>
+          <span id="confirmedCustomerName" class="font-semibold text-white">Arjun Sharma</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Payment Mode:</span>
+          <span id="confirmedPaymentMethod" class="font-semibold text-white">UPI Instant</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Estimated Delivery:</span>
+          <span id="confirmedDeliveryDate" class="font-semibold text-emerald-400">3-4 Business Days</span>
+        </div>
+        <div class="flex justify-between pt-2 border-t border-slate-800 font-bold text-sm">
+          <span class="text-white">Amount Paid:</span>
+          <span id="confirmedAmount" class="text-cyan-400">₹0</span>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-3 pt-2">
+        <a 
+          href="index.html" 
+          class="flex-1 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all shadow-glow-cyan flex items-center justify-center gap-2"
+        >
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          Continue Shopping
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Checkout State Management & Simulation Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+
+      // Read cart from localStorage
+      let cart = [];
+      try {
+        cart = JSON.parse(localStorage.getItem('nexus_pop_cart')) || [];
+      } catch (e) {
+        cart = [];
+      }
+
+      let discountPercentage = localStorage.getItem('nexus_pop_discount') ? parseFloat(localStorage.getItem('nexus_pop_discount')) : 0;
+      let selectedPaymentMethod = 'UPI';
+
+      const shippingSection = document.getElementById('shippingSection');
+      const paymentSection = document.getElementById('paymentSection');
+      const step1Indicator = document.getElementById('step1Indicator');
+      const step2Indicator = document.getElementById('step2Indicator');
+      const step3Indicator = document.getElementById('step3Indicator');
+
+      const addressForm = document.getElementById('addressForm');
+      const backToAddressBtn = document.getElementById('backToAddressBtn');
+      const placeOrderBtn = document.getElementById('placeOrderBtn');
+      const placeOrderBtnText = document.getElementById('placeOrderBtnText');
+
+      // Payment Tabs
+      const tabUpi = document.getElementById('tabUpi');
+      const tabCards = document.getElementById('tabCards');
+      const tabCod = document.getElementById('tabCod');
+      const upiMethod = document.getElementById('upiMethod');
+      const cardsMethod = document.getElementById('cardsMethod');
+      const codMethod = document.getElementById('codMethod');
+
+      // Summary Elements
+      const summaryItemList = document.getElementById('summaryItemList');
+      const summaryItemCount = document.getElementById('summaryItemCount');
+      const summarySubtotal = document.getElementById('summarySubtotal');
+      const summaryDiscountRow = document.getElementById('summaryDiscountRow');
+      const summaryDiscount = document.getElementById('summaryDiscount');
+      const summaryShipping = document.getElementById('summaryShipping');
+      const summaryGrandTotal = document.getElementById('summaryGrandTotal');
+
+      // Coupon Elements
+      const summaryCouponInput = document.getElementById('summaryCouponInput');
+      const summaryApplyCouponBtn = document.getElementById('summaryApplyCouponBtn');
+      const summaryCouponMsg = document.getElementById('summaryCouponMsg');
+
+      // Auto-populate pincode mock demo
+      document.getElementById('pincode').addEventListener('input', (e) => {
+        const pin = e.target.value.trim();
+        if (pin === '110001') {
+          document.getElementById('city').value = 'New Delhi';
+          document.getElementById('state').value = 'Delhi';
+        } else if (pin === '400001') {
+          document.getElementById('city').value = 'Mumbai';
+          document.getElementById('state').value = 'Maharashtra';
+        } else if (pin === '560001') {
+          document.getElementById('city').value = 'Bengaluru';
+          document.getElementById('state').value = 'Karnataka';
+        }
+      });
+
+      // Render Order Summary
+      function renderSummary() {
+        if (cart.length === 0) {
+          summaryItemList.innerHTML = `
+            <div class="text-center py-6 text-slate-500">
+              <p>Your cart is empty!</p>
+              <a href="index.html" class="text-cyan-400 font-bold hover:underline mt-2 inline-block">Return to Store</a>
+            </div>
+          `;
+          summaryItemCount.textContent = '0 items';
+          summarySubtotal.textContent = '₹0';
+          summaryGrandTotal.textContent = '₹0';
+          placeOrderBtnText.textContent = 'Pay ₹0 & Confirm Order';
+          return;
+        }
+
+        const totalItems = cart.reduce((sum, i) => sum + i.quantity, 0);
+        summaryItemCount.textContent = `${totalItems} items`;
+
+        summaryItemList.innerHTML = cart.map(item => `
+          <div class="flex items-center gap-3 p-2 rounded-xl bg-slate-950/60 border border-slate-800">
+            <img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded-lg object-cover bg-slate-800 shrink-0">
+            <div class="flex-1 min-w-0">
+              <h5 class="font-medium text-white truncate text-xs">${item.name}</h5>
+              <div class="flex items-center justify-between text-[11px] text-slate-400 mt-1">
+                <span>Qty: ${item.quantity}</span>
+                <span class="font-bold text-slate-200">₹${item.price * item.quantity}</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        const subtotal = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+        const shipping = subtotal >= 999 ? 0 : 49;
+        const discountAmount = Math.round(subtotal * (discountPercentage / 100));
+        const grandTotal = Math.max(0, subtotal - discountAmount + shipping);
+
+        summarySubtotal.textContent = `₹${subtotal}`;
+        summaryShipping.textContent = shipping === 0 ? 'FREE' : `₹${shipping}`;
+
+        if (discountAmount > 0) {
+          summaryDiscountRow.style.display = 'flex';
+          summaryDiscount.textContent = `-₹${discountAmount}`;
+        } else {
+          summaryDiscountRow.style.display = 'none';
+        }
+
+        summaryGrandTotal.textContent = `₹${grandTotal}`;
+        placeOrderBtnText.textContent = `Pay ₹${grandTotal} & Confirm Order`;
+      }
+
+      renderSummary();
+
+      // Handle Coupon Code
+      summaryApplyCouponBtn.addEventListener('click', () => {
+        const code = summaryCouponInput.value.trim().toUpperCase();
+        if (code === 'NEXUS10') {
+          discountPercentage = 10;
+          localStorage.setItem('nexus_pop_discount', '10');
+          summaryCouponMsg.className = 'text-[11px] mt-1 text-emerald-400 font-semibold';
+          summaryCouponMsg.textContent = '🎉 Coupon NEXUS10 applied! 10% discount added.';
+          summaryCouponMsg.classList.remove('hidden');
+          renderSummary();
+        } else {
+          summaryCouponMsg.className = 'text-[11px] mt-1 text-rose-400 font-semibold';
+          summaryCouponMsg.textContent = 'Invalid promo code. Try "NEXUS10".';
+          summaryCouponMsg.classList.remove('hidden');
+        }
+      });
+
+      // Step 1: Address submission
+      addressForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (cart.length === 0) {
+          alert('Your cart is empty! Please add items to checkout.');
+          return;
+        }
+
+        // Advance to Step 2
+        shippingSection.classList.add('hidden');
+        paymentSection.classList.remove('hidden');
+
+        // Update Stepper UI
+        step1Indicator.querySelector('div').className = 'w-9 h-9 rounded-full bg-emerald-500 text-slate-950 font-black text-sm flex items-center justify-center';
+        step1Indicator.querySelector('div').innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>';
+        step1Indicator.querySelector('span').className = 'text-xs font-semibold text-emerald-400';
+
+        step2Indicator.querySelector('div').className = 'w-9 h-9 rounded-full bg-rose-500 text-white font-black text-sm flex items-center justify-center shadow-glow-crimson';
+        step2Indicator.querySelector('span').className = 'text-xs font-bold text-rose-400';
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Back to Address
+      backToAddressBtn.addEventListener('click', () => {
+        paymentSection.classList.add('hidden');
+        shippingSection.classList.remove('hidden');
+
+        step1Indicator.querySelector('div').className = 'w-9 h-9 rounded-full bg-cyan-500 text-slate-950 font-black text-sm flex items-center justify-center shadow-glow-cyan';
+        step1Indicator.querySelector('div').textContent = '1';
+        step1Indicator.querySelector('span').className = 'text-xs font-bold text-cyan-400';
+
+        step2Indicator.querySelector('div').className = 'w-9 h-9 rounded-full bg-slate-800 text-slate-400 font-black text-sm flex items-center justify-center border border-slate-700';
+        step2Indicator.querySelector('span').className = 'text-xs font-medium text-slate-400';
+      });
+
+      // Tab Switching
+      function switchTab(activeTab, activeMethod, methodName) {
+        [tabUpi, tabCards, tabCod].forEach(tab => {
+          tab.className = 'pay-tab py-2.5 rounded-lg font-semibold text-slate-400 hover:text-white transition-all';
+        });
+        activeTab.className = 'pay-tab py-2.5 rounded-lg font-bold bg-cyan-500 text-slate-950 shadow transition-all';
+
+        [upiMethod, cardsMethod, codMethod].forEach(m => m.classList.add('hidden'));
+        activeMethod.classList.remove('hidden');
+        selectedPaymentMethod = methodName;
+      }
+
+      tabUpi.addEventListener('click', () => switchTab(tabUpi, upiMethod, 'UPI (Scan & Pay)'));
+      tabCards.addEventListener('click', () => switchTab(tabCards, cardsMethod, 'Credit / Debit Card'));
+      tabCod.addEventListener('click', () => switchTab(tabCod, codMethod, 'Cash on Delivery'));
+
+      // UPI Verification simulation
+      document.getElementById('verifyUpiBtn').addEventListener('click', () => {
+        const vpa = document.getElementById('upiIdInput').value.trim();
+        const status = document.getElementById('upiVerifyStatus');
+        if (vpa.includes('@')) {
+          status.className = 'text-[11px] mt-1 text-emerald-400 font-semibold';
+          status.textContent = `✓ Verified user: ${vpa.split('@')[0]} (Account linked)`;
+        } else {
+          status.className = 'text-[11px] mt-1 text-rose-400 font-semibold';
+          status.textContent = 'Please enter a valid UPI ID (e.g. name@okhdfcbank)';
+        }
+      });
+
+      // Card Formatting Helper
+      const cardNumberInput = document.getElementById('cardNumber');
+      cardNumberInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+        let formatted = value.match(/.{1,4}/g)?.join(' ') || value;
+        e.target.value = formatted.substring(0, 19);
+      });
+
+      // Step 3: Place Order & Confirm Modal
+      placeOrderBtn.addEventListener('click', () => {
+        if (cart.length === 0) {
+          alert('Your cart is empty!');
+          return;
+        }
+
+        // Show loading state on button
+        placeOrderBtn.disabled = true;
+        placeOrderBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+          Processing Payment with Bank Gateway...
+        `;
+
+        setTimeout(() => {
+          // Generate simulated Order ID
+          const orderNum = Math.floor(10000 + Math.random() * 90000);
+          const orderId = `#NX-${orderNum}`;
+          const customerName = document.getElementById('fullName').value || 'Arjun Sharma';
+          const subtotal = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+          const shipping = subtotal >= 999 ? 0 : 49;
+          const discountAmount = Math.round(subtotal * (discountPercentage / 100));
+          const grandTotal = Math.max(0, subtotal - discountAmount + shipping);
+
+          // Populate Confirmation Modal
+          document.getElementById('confirmedOrderId').textContent = orderId;
+          document.getElementById('confirmedCustomerName').textContent = customerName;
+          document.getElementById('confirmedPaymentMethod').textContent = selectedPaymentMethod;
+          document.getElementById('confirmedAmount').textContent = `₹${grandTotal}`;
+
+          // Clear cart
+          localStorage.removeItem('nexus_pop_cart');
+          localStorage.removeItem('nexus_pop_discount');
+
+          // Open Modal
+          const modal = document.getElementById('orderConfirmationModal');
+          modal.classList.remove('hidden');
+          setTimeout(() => {
+            modal.classList.remove('opacity-0');
+          }, 50);
+
+          // Update Stepper Step 3
+          step2Indicator.querySelector('div').className = 'w-9 h-9 rounded-full bg-emerald-500 text-slate-950 font-black text-sm flex items-center justify-center';
+          step2Indicator.querySelector('div').innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>';
+          step3Indicator.querySelector('div').className = 'w-9 h-9 rounded-full bg-emerald-500 text-slate-950 font-black text-sm flex items-center justify-center shadow-glow-cyan';
+          step3Indicator.querySelector('span').className = 'text-xs font-bold text-emerald-400';
+          
+          lucide.createIcons();
+        }, 1200);
+      });
+
+    });
+  </script>
+</body>
+</html>
