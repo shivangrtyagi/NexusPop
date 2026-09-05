@@ -26,9 +26,9 @@ if (typeof document !== 'undefined') {
 // Load cart & applied coupons from localStorage
 function loadCartFromStorage() {
   try {
-    const saved = localStorage.getItem('nexus_pop_cart');
+    const saved = localStorage.getItem('herohaven_cart') || localStorage.getItem('nexus_pop_cart');
     state.cart = saved ? JSON.parse(saved) : [];
-    const savedDiscount = localStorage.getItem('nexus_pop_discount');
+    const savedDiscount = localStorage.getItem('herohaven_discount') || localStorage.getItem('nexus_pop_discount');
     state.discountPercent = savedDiscount ? parseFloat(savedDiscount) : 0;
   } catch (err) {
     console.error('Failed to load cart from storage:', err);
@@ -40,8 +40,8 @@ function loadCartFromStorage() {
 // Save cart to localStorage
 function saveCartToStorage() {
   try {
-    localStorage.setItem('nexus_pop_cart', JSON.stringify(state.cart));
-    localStorage.setItem('nexus_pop_discount', state.discountPercent.toString());
+    localStorage.setItem('herohaven_cart', JSON.stringify(state.cart));
+    localStorage.setItem('herohaven_discount', state.discountPercent.toString());
   } catch (err) {
     console.error('Failed to save cart to storage:', err);
   }
@@ -622,17 +622,17 @@ function applyPromoCode() {
   if (!input || !msg) return;
 
   const code = input.value.trim().toUpperCase();
-  if (code === 'NEXUS10') {
+  if (code === 'HAVEN10' || code === 'NEXUS10') {
     state.discountPercent = 10;
     saveCartToStorage();
     updateCartUI();
     msg.className = 'text-[11px] text-emerald-400 font-semibold';
-    msg.textContent = '🎉 10% instant discount applied!';
+    msg.textContent = `🎉 10% instant discount applied with ${code}!`;
     msg.classList.remove('hidden');
-    showToast('Coupon NEXUS10 applied (10% OFF)!');
+    showToast(`Coupon ${code} applied (10% OFF)!`);
   } else {
     msg.className = 'text-[11px] text-rose-400 font-semibold';
-    msg.textContent = 'Invalid code. Use "NEXUS10" for 10% off.';
+    msg.textContent = 'Invalid code. Use "HAVEN10" for 10% off.';
     msg.classList.remove('hidden');
   }
 }
@@ -938,5 +938,11 @@ if (typeof window !== 'undefined') {
   window.nexusOpenCart = openCart;
   window.nexusCloseCart = closeCart;
   window.nexusHandleSearch = handleSearchSubmit;
+
+  window.havenAddToCart = addToCart;
+  window.havenAddBundleToCart = addBundleToCart;
+  window.havenOpenCart = openCart;
+  window.havenCloseCart = closeCart;
+  window.havenHandleSearch = handleSearchSubmit;
 }
 

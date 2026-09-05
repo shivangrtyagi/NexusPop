@@ -79,15 +79,15 @@ class NexusChatbot {
   }
 
   renderWelcomeMessage() {
-    const welcome = `👋 **Hey there, fellow fan! I'm Nexus Jarvis, your pop-culture shopping wingman.**
+    const welcome = `👋 **Greetings! I am J.A.R.V.I.S., your AI assistant for Hero Haven.**
 
-I know every corner of our Anime, Marvel, and DC vault:
-• Ask me: *"Show me Gojo Satoru and Spider-Man gear"*
-• Ask me: *"What do you have under ₹500?"*
-• Ask me: *"How close am I to free shipping?"*
-• Ask me: *"Recommend a gift combo for a Batman fan"*
+I have complete access to our Anime & Superhero vaults:
+• Ask: *"Show me Gojo Satoru and Spider-Man gear"*
+• Ask: *"What items do you have under ₹500?"*
+• Ask: *"How close am I to free shipping?"*
+• Ask: *"Recommend a gift combo for a Batman fan"*
 
-What universe are we diving into today?`;
+How may I assist your quest today?`;
     this.appendBotMessage(welcome, false);
   }
 
@@ -103,7 +103,7 @@ What universe are we diving into today?`;
     // Get current cart from localStorage for full context
     let cart = [];
     try {
-      cart = JSON.parse(localStorage.getItem('nexus_pop_cart')) || [];
+      cart = JSON.parse(localStorage.getItem('herohaven_cart')) || JSON.parse(localStorage.getItem('nexus_pop_cart')) || [];
     } catch (e) {
       cart = [];
     }

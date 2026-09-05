@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout | Nexus Pop Store</title>
+  <title>Checkout | Hero Haven Official Store</title>
+  <link rel="icon" type="image/png" href="logo.png">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,10 +48,11 @@
   <!-- Minimal Checkout Header -->
   <header class="border-b border-slate-800 bg-[#0b0f19]/90 backdrop-blur-md sticky top-0 z-30">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2 group">
+      <a href="index.html" class="flex items-center gap-2.5 group">
         <i data-lucide="arrow-left" class="w-4 h-4 text-slate-400 group-hover:text-cyan-400 group-hover:-translate-x-0.5 transition-all"></i>
+        <img src="logo.png" alt="Hero Haven" class="w-7 h-7 rounded-lg object-contain bg-slate-900 border border-slate-700 p-0.5 shadow-sm">
         <div class="font-display font-black text-xl text-white">
-          NEXUS<span class="text-rose-500">POP</span>
+          HERO<span class="text-rose-500">HAVEN</span>
         </div>
       </a>
       <div class="flex items-center gap-2 text-xs text-slate-400">
@@ -433,7 +435,7 @@
               <input 
                 type="text" 
                 id="summaryCouponInput" 
-                placeholder="Code (NEXUS10)" 
+                placeholder="Code (HAVEN10)" 
                 class="flex-1 uppercase px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 font-mono"
               >
               <button id="summaryApplyCouponBtn" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-cyan-400 font-bold border border-slate-700 rounded-lg text-xs">
@@ -545,15 +547,17 @@
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
 
-      // Read cart from localStorage
+      // Read cart from localStorage (supporting herohaven_cart with nexus_pop_cart backwards compatibility)
       let cart = [];
       try {
-        cart = JSON.parse(localStorage.getItem('nexus_pop_cart')) || [];
+        cart = JSON.parse(localStorage.getItem('herohaven_cart')) || JSON.parse(localStorage.getItem('nexus_pop_cart')) || [];
       } catch (e) {
         cart = [];
       }
 
-      let discountPercentage = localStorage.getItem('nexus_pop_discount') ? parseFloat(localStorage.getItem('nexus_pop_discount')) : 0;
+      let discountPercentage = localStorage.getItem('herohaven_discount') ? 
+        parseFloat(localStorage.getItem('herohaven_discount')) : 
+        (localStorage.getItem('nexus_pop_discount') ? parseFloat(localStorage.getItem('nexus_pop_discount')) : 0);
       let selectedPaymentMethod = 'UPI';
 
       const shippingSection = document.getElementById('shippingSection');
@@ -660,16 +664,17 @@
       // Handle Coupon Code
       summaryApplyCouponBtn.addEventListener('click', () => {
         const code = summaryCouponInput.value.trim().toUpperCase();
-        if (code === 'NEXUS10') {
+        if (code === 'HAVEN10' || code === 'NEXUS10') {
           discountPercentage = 10;
+          localStorage.setItem('herohaven_discount', '10');
           localStorage.setItem('nexus_pop_discount', '10');
           summaryCouponMsg.className = 'text-[11px] mt-1 text-emerald-400 font-semibold';
-          summaryCouponMsg.textContent = '🎉 Coupon NEXUS10 applied! 10% discount added.';
+          summaryCouponMsg.textContent = '🎉 Coupon HAVEN10 applied! 10% discount added.';
           summaryCouponMsg.classList.remove('hidden');
           renderSummary();
         } else {
           summaryCouponMsg.className = 'text-[11px] mt-1 text-rose-400 font-semibold';
-          summaryCouponMsg.textContent = 'Invalid promo code. Try "NEXUS10".';
+          summaryCouponMsg.textContent = 'Invalid promo code. Try "HAVEN10".';
           summaryCouponMsg.classList.remove('hidden');
         }
       });
@@ -767,7 +772,7 @@
         setTimeout(() => {
           // Generate simulated Order ID
           const orderNum = Math.floor(10000 + Math.random() * 90000);
-          const orderId = `#NX-${orderNum}`;
+          const orderId = `#HH-${orderNum}`;
           const customerName = document.getElementById('fullName').value || 'Arjun Sharma';
           const subtotal = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
           const shipping = subtotal >= 999 ? 0 : 49;
@@ -781,6 +786,8 @@
           document.getElementById('confirmedAmount').textContent = `₹${grandTotal}`;
 
           // Clear cart
+          localStorage.removeItem('herohaven_cart');
+          localStorage.removeItem('herohaven_discount');
           localStorage.removeItem('nexus_pop_cart');
           localStorage.removeItem('nexus_pop_discount');
 

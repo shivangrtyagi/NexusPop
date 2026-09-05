@@ -1,6 +1,6 @@
-# ⚡ Nexus Pop - Pop-Culture Fandom Merchandise Store
+# ⚡ Hero Haven - Pop-Culture Fandom Merchandise Store
 
-> An authentic merchandise e-commerce platform specializing in **Anime**, **Marvel**, and **DC** merchandise with dedicated Franchise Hubs, Indian payment simulation (UPI, Cards, COD), and a Google Gemini-powered AI Shopping Assistant.
+> An authentic merchandise e-commerce platform specializing in **Anime**, **Marvel**, and **DC** merchandise with dedicated Franchise Hubs, Indian payment simulation (UPI, Cards, COD), and a Google Gemini-powered AI Assistant (**J.A.R.V.I.S.**).
 
 ---
 
@@ -10,9 +10,9 @@
 - **Dedicated Franchise & Superhero Vaults (`fandom.html`)**: Themed character portals for *Jujutsu Kaisen*, *Spider-Verse*, *The Batman*, *Demon Slayer*, and *One Piece* with lore quotes and custom color palettes.
 - **Collector's Bundle Deals**: 1-click add for curated multi-item setup discounts.
 - **Authentic Brand Realism**: Launch Batch #01 tags, archival craftsmanship specs (300+ GSM Cardstock, 10ft Drop Armor, Waterproof Vinyl) with zero fake review counts.
-- **Persistent Slide-Over Cart Drawer**: Real-time quantity adjustments, free shipping progress bar (Free delivery over ₹999), and coupon code support (`NEXUS10`).
+- **Persistent Slide-Over Cart Drawer**: Real-time quantity adjustments, free shipping progress bar (Free delivery over ₹999), and coupon code support (`HAVEN10`).
 - **Simulated Indian Checkout**: UPI (interactive QR & VPA verification), RuPay/Visa Cards, and Cash on Delivery (COD).
-- **AI Shopping Assistant ("Nexus Jarvis")**: Floating chatbot widget powered by Google Gemini API (`gemini-2.5-flash`) with smart local fallback.
+- **AI Shopping Assistant ("J.A.R.V.I.S.")**: Floating chatbot widget powered by Google Gemini API (`gemini-2.5-flash`) with smart local fallback.
 
 ---
 
