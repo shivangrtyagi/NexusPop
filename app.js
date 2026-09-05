@@ -135,9 +135,9 @@ function initEventListeners() {
   categoryPills.forEach(pill => {
     pill.addEventListener('click', () => {
       categoryPills.forEach(p => {
-        p.className = 'cat-pill px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700 hover:bg-slate-800 hover:text-white transition-all shadow-sm';
+        p.className = 'cat-pill px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700 hover:bg-slate-800 hover:text-white transition-all shadow-sm tracking-wide';
       });
-      pill.className = 'cat-pill active px-4 py-2.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 shadow-glow-cyan transition-all border border-cyan-400';
+      pill.className = 'cat-pill active px-4 py-2.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 shadow-glow-cyan transition-all border border-cyan-400 tracking-wide';
       state.activeCategory = pill.getAttribute('data-category');
 
       // If "All" is clicked, reset BOTH category and universe/fandom so it restores Anime, Marvel, and DC products
@@ -226,8 +226,8 @@ function initEventListeners() {
 
       categoryPills.forEach((p, idx) => {
         p.className = idx === 0 
-          ? 'cat-pill active px-4 py-2.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 shadow-glow-cyan transition-all border border-cyan-400'
-          : 'cat-pill px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700 hover:bg-slate-800 hover:text-white transition-all shadow-sm';
+          ? 'cat-pill active px-4 py-2.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 shadow-glow-cyan transition-all border border-cyan-400 tracking-wide'
+          : 'cat-pill px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700 hover:bg-slate-800 hover:text-white transition-all shadow-sm tracking-wide';
       });
 
       universePills.forEach((p, idx) => {
