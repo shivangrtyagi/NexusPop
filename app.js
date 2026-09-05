@@ -135,9 +135,9 @@ function initEventListeners() {
   categoryPills.forEach(pill => {
     pill.addEventListener('click', () => {
       categoryPills.forEach(p => {
-        p.className = 'cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-all';
+        p.className = 'cat-pill px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700 hover:bg-slate-800 hover:text-white transition-all shadow-sm';
       });
-      pill.className = 'cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-950 transition-all';
+      pill.className = 'cat-pill active px-4 py-2.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 shadow-glow-cyan transition-all border border-cyan-400';
       state.activeCategory = pill.getAttribute('data-category');
       renderFilteredCatalog();
     });
@@ -161,11 +161,25 @@ function initEventListeners() {
   universeCards.forEach(card => {
     card.addEventListener('click', () => {
       const selectedUniverse = card.getAttribute('data-universe');
-      state.activeFandom = selectedUniverse;
-      
-      // Update sub-pills UI
+      if (state.activeFandom === selectedUniverse) {
+        state.activeFandom = 'All';
+      } else {
+        state.activeFandom = selectedUniverse;
+      }
+
+      // Visual feedback on cards
+      universeCards.forEach(c => {
+        const u = c.getAttribute('data-universe');
+        if (state.activeFandom === u) {
+          c.classList.add('ring-2', 'ring-cyan-400');
+        } else {
+          c.classList.remove('ring-2', 'ring-cyan-400');
+        }
+      });
+
+      // Update sub-pills UI if present
       universePills.forEach(pill => {
-        if (pill.getAttribute('data-fandom') === selectedUniverse) {
+        if (pill.getAttribute('data-fandom') === state.activeFandom) {
           pill.className = 'fandom-pill px-2.5 py-1 rounded bg-slate-800 text-cyan-400 font-semibold border border-cyan-500/40';
         } else {
           pill.className = 'fandom-pill px-2.5 py-1 rounded bg-slate-800/60 text-slate-400 hover:text-white font-medium';
@@ -201,10 +215,12 @@ function initEventListeners() {
       if (mobileSearchInput) mobileSearchInput.value = '';
       if (sortSelect) sortSelect.value = 'featured';
 
+      universeCards.forEach(c => c.classList.remove('ring-2', 'ring-cyan-400'));
+
       categoryPills.forEach((p, idx) => {
         p.className = idx === 0 
-          ? 'cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-950 transition-all'
-          : 'cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-all';
+          ? 'cat-pill active px-4 py-2.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 shadow-glow-cyan transition-all border border-cyan-400'
+          : 'cat-pill px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700 hover:bg-slate-800 hover:text-white transition-all shadow-sm';
       });
 
       universePills.forEach((p, idx) => {
