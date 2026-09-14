@@ -355,10 +355,10 @@ function renderFilteredCatalog() {
     const discountPercent = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
 
     return `
-      <div class="group bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
+      <div class="group bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
         
         <!-- Image & Badges Container -->
-        <div class="relative overflow-hidden aspect-[4/3] bg-slate-950">
+        <div class="relative overflow-hidden aspect-square sm:aspect-[4/3] bg-slate-950">
           <img 
             src="${product.image}" 
             alt="${product.name}" 
@@ -367,48 +367,48 @@ function renderFilteredCatalog() {
           >
           
           <!-- Top Tag Badges -->
-          <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border ${universeColor}">
+          <div class="absolute top-2 sm:top-3 left-2 sm:left-3 flex flex-wrap gap-1">
+            <span class="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full uppercase tracking-wider border ${universeColor}">
               ${product.universe}
             </span>
           </div>
 
           <!-- Category pill -->
-          <div class="absolute bottom-3 left-3">
-            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-950/80 text-slate-300 backdrop-blur-sm">
+          <div class="absolute bottom-2 sm:bottom-3 left-2 sm:left-3">
+            <span class="text-[9px] sm:text-[10px] font-medium px-1.5 sm:px-2 py-0.5 rounded bg-slate-950/80 text-slate-300 backdrop-blur-sm">
               ${product.category}
             </span>
           </div>
 
           <!-- Savings Badge -->
-          <div class="absolute top-3 right-3 bg-rose-600 text-white font-black text-[10px] px-2 py-0.5 rounded-full shadow">
+          <div class="absolute top-2 sm:top-3 right-2 sm:right-3 bg-rose-600 text-white font-black text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full shadow">
             ${discountPercent}% OFF
           </div>
         </div>
 
         <!-- Product Content -->
-        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+        <div class="p-2.5 sm:p-4 flex-1 flex flex-col justify-between space-y-2 sm:space-y-3">
           
           <div>
             <!-- Title -->
-            <h4 class="font-display font-bold text-sm text-white line-clamp-2 leading-snug group-hover:text-cyan-400 transition-colors">
+            <h4 class="font-display font-bold text-xs sm:text-sm text-white line-clamp-2 leading-snug group-hover:text-cyan-400 transition-colors">
               ${product.name}
             </h4>
           </div>
 
           <!-- Price & Add Button Row -->
-          <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-3">
-            <div>
-              <div class="flex items-baseline gap-1.5">
-                <span class="text-lg font-black font-display text-white">₹${product.price}</span>
-                <span class="text-xs text-slate-500 line-through">₹${product.originalPrice}</span>
+          <div class="pt-2 sm:pt-3 border-t border-slate-800/80 flex items-center justify-between gap-1 sm:gap-3">
+            <div class="min-w-0">
+              <div class="flex items-baseline gap-1 sm:gap-1.5">
+                <span class="text-sm sm:text-lg font-black font-display text-white">₹${product.price}</span>
+                <span class="text-[10px] sm:text-xs text-slate-500 line-through">₹${product.originalPrice}</span>
               </div>
-              <span class="text-[10px] text-emerald-400 font-semibold">In Stock • Fast Dispatch</span>
+              <span class="text-[9px] sm:text-[10px] text-emerald-400 font-semibold block truncate">In Stock • Fast Dispatch</span>
             </div>
 
             <button 
               data-id="${product.id}"
-              class="add-to-cart-btn px-3.5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-glow-cyan transition-all"
+              class="add-to-cart-btn px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-cyan-500 hover:bg-cyan-400 active:scale-95 text-slate-950 font-bold text-[11px] sm:text-xs flex items-center gap-1 shadow-glow-cyan transition-all shrink-0"
             >
               <i data-lucide="plus" class="w-3.5 h-3.5 stroke-[3]"></i>
               <span>Add</span>
