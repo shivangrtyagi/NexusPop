@@ -19,7 +19,6 @@ if (typeof document !== 'undefined') {
     initEventListeners();
     renderFilteredCatalog();
     updateCartUI();
-    initHeroCarousel();
   });
 }
 
@@ -672,37 +671,6 @@ export function showToast(message, type = 'cyan') {
       toast.remove();
     }, 300);
   }, 3200);
-}
-
-// Hero Carousel rotation
-function initHeroCarousel() {
-  const heroImage = document.getElementById('heroImage');
-  if (!heroImage) return;
-
-  const heroDrops = [
-    {
-      img: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80',
-      title: 'Jujutsu Kaisen: Unlimited Void'
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=800&q=80',
-      title: 'Spider-Man: Into The Spider-Verse'
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80',
-      title: 'The Batman: I Am The Shadows'
-    }
-  ];
-
-  let currentIdx = 0;
-  setInterval(() => {
-    currentIdx = (currentIdx + 1) % heroDrops.length;
-    heroImage.style.opacity = '0.3';
-    setTimeout(() => {
-      heroImage.src = heroDrops[currentIdx].img;
-      heroImage.style.opacity = '1';
-    }, 350);
-  }, 6000);
 }
 
 // Add entire bundle of products to cart
